@@ -1,0 +1,8 @@
+{
+  "name": "lit-rdf",
+  "version": "0.0.0",
+  "type": "module",
+  "peerDependencies": {
+    "lit": "^3"
+  }
+}
