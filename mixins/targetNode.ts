@@ -1,15 +1,15 @@
 import {NamedNode, Term} from "@rdfjs/types";
 import {property, state} from "lit/decorators.js";
-import {PropertyValues} from "lit";
+import {LitElement, PropertyValues} from "lit";
 import { provide} from "@lit/context";
 import {focusNode} from "../context.js";
 import {MultiPointer} from "clownface";
 import {toNamedNode} from "../lib/converter.js";
-import {LitElementConstructor} from "../lib/constructor.js";
+import {Constructor} from "../lib/constructor.js";
 import {consumeEnvironment} from "./environment.js";
 import {consumeGraph} from "./graph.js";
 
-export function provideTargetNode(base: LitElementConstructor) {
+export function provideTargetNode<T extends LitElement = LitElement>(base: Constructor<T>) {
     class DataBound extends consumeGraph(consumeEnvironment(base)) {
         @property({type: Object, converter: toNamedNode, attribute: 'target-objects-of'})
         targetObjectsOf: NamedNode | undefined

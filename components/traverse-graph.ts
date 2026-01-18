@@ -1,10 +1,16 @@
-import {html, LitElement} from "lit";
+import {css, html, LitElement} from "lit";
 import {customElement, property} from "lit/decorators.js";
 import {traverseGraph} from "../mixins/traverseGraph.js";
 import {GraphPointer, MultiPointer} from "clownface";
 
 @customElement('traverse-graph')
 export default class extends traverseGraph(LitElement) {
+    static styles = css`
+        :host {
+            display: contents;
+        }
+    `
+
     @property({ type: Object})
     renderObjectNode?: (node: GraphPointer) => unknown
 

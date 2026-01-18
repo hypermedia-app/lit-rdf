@@ -7,7 +7,7 @@ import {state} from "lit/decorators.js";
 export function consumeEnvironment<T extends LitElementConstructor>(base: T) {
     @ssrConnectedCallback()
     class Impl extends base {
-        @consume({context})
+        @consume({ context })
         rdf!: Environment
     }
 

@@ -6,11 +6,7 @@ import {dataset, Environment} from "../context.js";
 import {ssrConnectedCallback} from "../lib/ssrConnectedCallback.js";
 import {state} from "lit/decorators.js";
 
-type HasEnvironment = {
-    rdf: Environment
-}
-
-export function provideGraph<T extends LitElement>(base: Constructor<LitElement & T & HasEnvironment>) {
+export function provideGraph<T extends LitElement>(base: Constructor<T>) {
     @ssrConnectedCallback()
     // @ts-ignore
     class WithGraphProvider extends base {
@@ -22,7 +18,7 @@ export function provideGraph<T extends LitElement>(base: Constructor<LitElement 
     return WithGraphProvider
 }
 
-export function consumeGraph<T extends LitElement>(base: Constructor<LitElement & T & HasEnvironment>) {
+export function consumeGraph<T extends LitElement>(base: Constructor<T>) {
     @ssrConnectedCallback()
     // @ts-ignore
     class WithGraphConsumer extends base {

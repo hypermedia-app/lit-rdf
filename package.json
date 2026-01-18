@@ -2,6 +2,11 @@
   "name": "lit-rdf",
   "version": "0.0.0",
   "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./mixins.js": "./mixins.js",
+    "./runtime/*.js": "./runtime/*.js"
+  },
   "peerDependencies": {
     "lit": "^3"
   }
