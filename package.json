@@ -6,6 +6,7 @@
     ".": "./index.js",
     "./converter.js": "./lib/converter.js",
     "./mixins.js": "./mixins.js",
+    "./controllers.js": "./controllers.js",
     "./runtime/*.js": "./runtime/*.js"
   },
   "peerDependencies": {
