@@ -4,6 +4,7 @@
   "type": "module",
   "exports": {
     ".": "./index.js",
+    "./components/*.js": "./components/*.js",
     "./converter.js": "./lib/converter.js",
     "./mixins.js": "./mixins.js",
     "./controllers.js": "./controllers.js",
