@@ -1,4 +1,4 @@
-import {NamedNode, Term} from "@rdfjs/types";
+import {NamedNode} from "@rdfjs/types";
 import {property, state} from "lit/decorators.js";
 import {LitElement, PropertyValues} from "lit";
 import { provide} from "@lit/context";

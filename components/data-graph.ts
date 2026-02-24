@@ -12,7 +12,7 @@ export default class extends provideGraph(consumeEnvironment(LitElement)) {
     @state()
     parent: AnyPointer | undefined
 
-    protected render(): unknown {
+    render(): unknown {
         return html`
             <slot></slot>`
     }

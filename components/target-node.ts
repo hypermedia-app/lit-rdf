@@ -1,10 +1,10 @@
 import {css, html, LitElement} from "lit";
 import {customElement, property} from "lit/decorators.js";
-import {provideTargetNode} from "../mixins/targetNode";
+import {provideTargetNode} from "../mixins/targetNode.js";
 import {NamedNode} from "@rdfjs/types";
-import {toNamedNode} from "../lib/converter";
+import {toNamedNode} from "../lib/converter.js";
 import {provide} from "@lit/context";
-import {sortCriteria} from "../context";
+import {sortCriteria} from "../context.js";
 
 @customElement('target-node')
 export default class extends provideTargetNode(LitElement) {

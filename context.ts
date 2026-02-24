@@ -1,5 +1,5 @@
 import { createContext } from '@lit/context'
-import {AnyPointer, GraphPointer, MultiPointer} from "clownface";
+import {AnyPointer, MultiPointer} from "clownface";
 import {DefaultEnv} from '@zazuko/env'
 import {NamedNode} from "@rdfjs/types";
 

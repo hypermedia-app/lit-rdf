@@ -1,7 +1,7 @@
 import {ReactiveController, ReactiveControllerHost} from "lit";
 import {Context, ContextConsumer} from "@lit/context";
 import {GraphPointer, MultiPointer} from "clownface";
-import {focusNode, sortCriteria} from "../context";
+import {focusNode, sortCriteria} from "../context.js";
 
 // @ts-ignore
 export class FocusNode implements ReactiveController {

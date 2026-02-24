@@ -1,6 +1,6 @@
 import {LitElementConstructor} from "../lib/constructor.js";
 import {toPropertyPath} from "../lib/converter.js";
-import {property, state} from "lit/decorators.js";
+import {property} from "lit/decorators.js";
 import {findNodes, ShaclPropertyPath} from "clownface-shacl-path";
 import {consumeFocusNode} from "./focusNode.js";
 import {MultiPointer} from "clownface";

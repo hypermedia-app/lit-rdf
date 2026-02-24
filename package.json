@@ -12,5 +12,18 @@
   },
   "peerDependencies": {
     "lit": "^3"
+  },
+  "dependencies": {
+    "@lit/context": "^1.1.6",
+    "@rdfjs-elements/lit-helpers": "^0.3.13",
+    "@rdfjs/types": "^2",
+    "@zazuko/env": "^3.0.1",
+    "clownface": "^2.0.3",
+    "clownface-shacl-path": "^2.4.0",
+    "is-url": "^1.2.4",
+    "sparql-path-parser": "^0.1.1"
+  },
+  "devDependencies": {
+    "@types/clownface": "^2.0.10"
   }
 }
