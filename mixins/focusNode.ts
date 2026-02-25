@@ -6,6 +6,10 @@ import { consumeEnvironment } from './environment.js'
 
 export function consumeFocusNode<T extends LitElementConstructor>(base: T) {
   class Impl extends consumeEnvironment(base) {
+    constructor(...args: any[]) {
+      super(...args)
+    }
+
     @consume({ context, subscribe: true })
       focusNode!: MultiPointer | undefined
   }

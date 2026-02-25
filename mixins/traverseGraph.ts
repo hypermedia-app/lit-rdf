@@ -11,6 +11,10 @@ import { consumeFocusNode } from './focusNode.js'
 
 export function traverseGraph<T extends LitElementConstructor>(Base: T) {
   class TraverseGraph extends consumeFocusNode(Base) {
+    constructor(...args: any[]) {
+      super(...args)
+    }
+
     @property({ type: Object, converter: toPropertyPath, attribute: 'property-path' })
       propertyPath: ShaclPropertyPath | undefined
 

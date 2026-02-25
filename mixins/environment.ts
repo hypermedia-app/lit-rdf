@@ -6,6 +6,10 @@ import { environment as context } from '../context.js'
 
 export function consumeEnvironment<T extends LitElementConstructor>(base: T) {
   class Impl extends base {
+    constructor(...args: any[]) {
+      super(...args)
+    }
+
     @consume({ context })
     public rdf!: Environment
   }
@@ -15,6 +19,10 @@ export function consumeEnvironment<T extends LitElementConstructor>(base: T) {
 
 export function provideEnvironment<T extends LitElementConstructor>(base: T) {
   class Impl extends base {
+    constructor(...args: any[]) {
+      super(...args)
+    }
+
     @state()
     @provide({ context })
     public rdf!: Environment
