@@ -1,14 +1,14 @@
-import {LitElementConstructor} from "../lib/constructor.js";
-import {consume} from "@lit/context";
-import {focusNode as context} from "../context.js";
-import {MultiPointer} from "clownface";
-import {consumeEnvironment} from "./environment.js";
+import { consume } from '@lit/context'
+import type { MultiPointer } from 'clownface'
+import type { LitElementConstructor } from '../lib/constructor.js'
+import { focusNode as context } from '../context.js'
+import { consumeEnvironment } from './environment.js'
 
 export function consumeFocusNode<T extends LitElementConstructor>(base: T) {
-    class Impl extends consumeEnvironment(base) {
-        @consume({ context, subscribe: true })
-        focusNode!: MultiPointer | undefined
-    }
+  class Impl extends consumeEnvironment(base) {
+    @consume({ context, subscribe: true })
+      focusNode!: MultiPointer | undefined
+  }
 
-    return Impl
+  return Impl
 }

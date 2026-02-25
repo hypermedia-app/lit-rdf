@@ -1,5 +1,5 @@
-import {LitElement} from "lit";
+import type { LitElement } from 'lit'
 
-export type Constructor<T = {}> = new (...args: any[]) => T;
+export type Constructor<T = unknown> = new (...args: unknown[]) => T;
 
 export type LitElementConstructor<T extends LitElement = LitElement> = Constructor<T>;

@@ -1,26 +1,24 @@
-import {LitElementConstructor} from "../lib/constructor.js";
-import {Environment, environment as context} from "../context.js";
-import {consume, provide} from "@lit/context";
-import {ssrConnectedCallback} from "../lib/ssrConnectedCallback.js";
-import {state} from "lit/decorators.js";
+import { consume, provide } from '@lit/context'
+import { state } from 'lit/decorators.js'
+import type { LitElementConstructor } from '../lib/constructor.js'
+import type { Environment } from '../context.js'
+import { environment as context } from '../context.js'
 
 export function consumeEnvironment<T extends LitElementConstructor>(base: T) {
-    @ssrConnectedCallback()
-    class Impl extends base {
-        @consume({ context })
-        rdf!: Environment
-    }
+  class Impl extends base {
+    @consume({ context })
+    public rdf!: Environment
+  }
 
-    return Impl
+  return Impl
 }
 
 export function provideEnvironment<T extends LitElementConstructor>(base: T) {
-    @ssrConnectedCallback()
-    class Impl extends base {
-        @state()
-        @provide({ context })
-        rdf!: Environment
-    }
+  class Impl extends base {
+    @state()
+    @provide({ context })
+    public rdf!: Environment
+  }
 
-    return Impl
+  return Impl
 }

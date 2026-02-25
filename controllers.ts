@@ -1,1 +1,1 @@
-export  {FocusNode} from './controllers/FocusNode.js';
+export { FocusNode } from './controllers/FocusNode.js'
