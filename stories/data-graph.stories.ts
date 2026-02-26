@@ -7,8 +7,10 @@ const meta = {
 } satisfies Meta
 
 export default meta
-type Story = StoryObj;
 
-export const BasicExample: Story = {
+export const BasicExample: StoryObj<{ labelProp: string }> = {
   render: BasicExamples.ResourceLabel,
+  args: {
+    labelProp: 'rdfs:label',
+  },
 }
