@@ -6,7 +6,8 @@
     "prepare": "husky",
     "lint": "eslint . --quiet --ignore-path .gitignore",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "release": "changesets publish"
   },
   "exports": {
     ".": "./index.js",
