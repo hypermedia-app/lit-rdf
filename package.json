@@ -12,9 +12,14 @@
     "release": "changeset publish"
   },
   "files": [
+    "CHANGELOG.md",
     "src/**/*.js",
     "src/**/*.d.ts"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hypermedia-app/lit-rdf"
+  },
   "exports": {
     ".": "./src/index.js",
     "./components/*.js": "./src/components/*.js",
