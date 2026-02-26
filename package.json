@@ -16,9 +16,6 @@
     "./controllers.js": "./controllers.js",
     "./runtime/*.js": "./runtime/*.js"
   },
-  "peerDependencies": {
-    "lit": "^3"
-  },
   "dependencies": {
     "@lit/context": "^1.1.6",
     "@rdfjs-elements/lit-helpers": "^0.3.13",
@@ -29,6 +26,7 @@
     "clownface": "^2.0.3",
     "clownface-shacl-path": "^2.4.0",
     "is-url": "^1.2.4",
+    "lit": "^3",
     "sparql-path-parser": "^0.1.1"
   },
   "devDependencies": {
@@ -50,7 +48,6 @@
     "eslint-plugin-storybook": "^10.2.12",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
-    "lit": "^3.3.2",
     "playwright": "^1.58.2",
     "rollup-plugin-polyfill-node": "^0.13.0",
     "storybook": "^10.2.12",
