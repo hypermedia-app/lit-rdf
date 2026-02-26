@@ -9,7 +9,7 @@
     "build-storybook": "storybook build",
     "build": "tsc",
     "prepack": "npm run build",
-    "release": "changesets publish"
+    "release": "changeset publish"
   },
   "files": [
     "src/**/*.js",
