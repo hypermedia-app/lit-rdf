@@ -16,7 +16,7 @@ export default class extends provideTargetNode(LitElement) {
 
   @property({ type: Object, attribute: 'order-by', converter: toNamedNode })
   @provide({ context: sortCriteria })
-    orderBy: NamedNode | undefined
+  public orderBy: NamedNode | undefined
 
   render() {
     return html`<slot></slot>`

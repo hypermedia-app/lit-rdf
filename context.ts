@@ -1,9 +1,9 @@
 import { createContext } from '@lit/context'
 import type { AnyPointer, MultiPointer } from 'clownface'
-import type { DefaultEnv } from '@zazuko/env'
+import type env from '@zazuko/env/web.js'
 import type { NamedNode } from '@rdfjs/types'
 
-export type Environment = DefaultEnv
+export type Environment = typeof env
 
 export const environment = createContext<Environment>(Symbol('environment'))
 export const dataset = createContext<AnyPointer | undefined>(Symbol('dataset'))
