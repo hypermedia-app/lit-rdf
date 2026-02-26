@@ -5,8 +5,8 @@ import type { MultiPointer } from 'clownface'
 import { provide } from '@lit/context'
 import type { PropertyValues } from 'lit'
 import { focusNode as context } from '../context.js'
-import { toPropertyPath } from '../lib/converter.js'
-import type { LitElementConstructor } from '../lib/constructor.js'
+import { toPropertyPath } from '../converter.js'
+import type { LitElementConstructor } from '../constructor.js'
 import { consumeFocusNode } from './focusNode.js'
 
 export function traverseGraph<T extends LitElementConstructor>(Base: T) {
@@ -35,5 +35,5 @@ export function traverseGraph<T extends LitElementConstructor>(Base: T) {
     }
   }
 
-  return TraverseGraph
+  return TraverseGraph as T & LitElementConstructor<{ objectNode: MultiPointer | undefined }>
 }

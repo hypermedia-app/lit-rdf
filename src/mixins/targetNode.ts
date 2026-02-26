@@ -4,8 +4,8 @@ import type { PropertyValues } from 'lit'
 import { provide } from '@lit/context'
 import type { MultiPointer } from 'clownface'
 import { focusNode } from '../context.js'
-import { toNamedNode } from '../lib/converter.js'
-import type { LitElementConstructor } from '../lib/constructor.js'
+import { toNamedNode } from '../converter.js'
+import type { LitElementConstructor, WithFocusNode } from '../constructor.js'
 import { consumeEnvironment } from './environment.js'
 import { consumeGraph } from './graph.js'
 
@@ -23,6 +23,9 @@ export function provideTargetNode<T extends LitElementConstructor>(base: T) {
 
     @property({ type: Object, converter: toNamedNode, attribute: 'target-class' })
     public targetClass: NamedNode | undefined
+
+    @property({ type: Object, converter: toNamedNode, attribute: 'target-node' })
+    public targetNode: NamedNode | undefined
 
     @provide({ context: focusNode })
     @state()
@@ -50,6 +53,10 @@ export function provideTargetNode<T extends LitElementConstructor>(base: T) {
     }
 
     findFocusNode() {
+      if (this.targetNode) {
+        return this.graph?.node(this.targetNode)
+      }
+
       if (this.targetClass) {
         return this.graph?.has(this.rdf.ns.rdf.type, this.targetClass)
       }
@@ -66,5 +73,5 @@ export function provideTargetNode<T extends LitElementConstructor>(base: T) {
     }
   }
 
-  return DataBound
+  return DataBound as T & LitElementConstructor<WithFocusNode>
 }

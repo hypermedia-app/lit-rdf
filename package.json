@@ -7,15 +7,22 @@
     "lint": "eslint . --quiet --ignore-path .gitignore",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "build": "tsc",
+    "prepack": "npm run build",
     "release": "changesets publish"
   },
+  "files": [
+    "src/**/*.js",
+    "src/**/*.d.ts"
+  ],
   "exports": {
-    ".": "./index.js",
-    "./components/*.js": "./components/*.js",
-    "./converter.js": "./lib/converter.js",
-    "./mixins.js": "./mixins.js",
-    "./controllers.js": "./controllers.js",
-    "./runtime/*.js": "./runtime/*.js"
+    ".": "./src/index.js",
+    "./components/*.js": "./src/components/*.js",
+    "./converter.js": "./src/converter.js",
+    "./constructor.js": "./src/constructor.js",
+    "./mixins.js": "./src/mixins.js",
+    "./controllers.js": "./src/controllers.js",
+    "./runtime/*.js": "./src/runtime/*.js"
   },
   "dependencies": {
     "@lit/context": "^1.1.6",

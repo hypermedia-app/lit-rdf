@@ -9,6 +9,16 @@
     "noImplicitAny": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
-    "allowArbitraryExtensions": true
-  }
+    "allowArbitraryExtensions": true,
+    "declaration": true
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    ".storybook",
+    "stories",
+    "vite.config.ts",
+    "vitest.config.ts"
+  ]
 }

@@ -1,8 +1,8 @@
 import { html } from 'lit'
-import '../components/data-graph.js'
-import '../components/target-node.js'
-import '../components/resource-label.js'
-import '../components/rdf-environment.js'
+import '../src/components/data-graph.js'
+import '../src/components/target-node.js'
+import '../src/components/resource-label.js'
+import '../src/components/rdf-environment.js'
 
 export const ResourceLabel = () => {
   return html`

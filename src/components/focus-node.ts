@@ -14,7 +14,7 @@ export default class extends LitElement {
 
   @provide({ context })
   @state()
-    focusNode: MultiPointer | undefined
+  public focusNode: MultiPointer | undefined
 
   render() {
     return html`<slot></slot>`

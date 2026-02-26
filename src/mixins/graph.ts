@@ -2,7 +2,7 @@ import type { AnyPointer } from 'clownface'
 import { consume, provide } from '@lit/context'
 import { state } from 'lit/decorators.js'
 import { dataset } from '../context.js'
-import type { LitElementConstructor } from '../lib/constructor.js'
+import type { LitElementConstructor, WithGraph } from '../constructor.js'
 
 export function provideGraph<T extends LitElementConstructor>(base: T) {
   class WithGraphProvider extends base {
@@ -15,7 +15,7 @@ export function provideGraph<T extends LitElementConstructor>(base: T) {
     public graph: AnyPointer | undefined
   }
 
-  return WithGraphProvider
+  return WithGraphProvider as T & LitElementConstructor<WithGraph>
 }
 
 export function consumeGraph<T extends LitElementConstructor>(base: T) {
@@ -29,5 +29,5 @@ export function consumeGraph<T extends LitElementConstructor>(base: T) {
     public graph: AnyPointer | undefined
   }
 
-  return WithGraphConsumer
+  return WithGraphConsumer as T & LitElementConstructor<WithGraph>
 }

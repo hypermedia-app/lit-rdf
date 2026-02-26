@@ -3,7 +3,7 @@ import { customElement, property } from 'lit/decorators.js'
 import type { NamedNode } from '@rdfjs/types'
 import { provide } from '@lit/context'
 import { provideTargetNode } from '../mixins/targetNode.js'
-import { toNamedNode } from '../lib/converter.js'
+import { toNamedNode } from '../converter.js'
 import { sortCriteria } from '../context.js'
 
 @customElement('target-node')

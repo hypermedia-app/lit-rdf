@@ -4,7 +4,7 @@ import type { NamedNode } from '@rdfjs/types'
 import { localizedLabel } from '@rdfjs-elements/lit-helpers/localizedLabel.js'
 import rdf from '@rdfjs/data-model'
 import { consumeFocusNode } from '../mixins/focusNode.js'
-import { toNamedNode } from '../lib/converter.js'
+import { toNamedNode } from '../converter.js'
 
 @customElement('resource-label')
 export class ResourceLabel extends consumeFocusNode(LitElement) {

@@ -3,7 +3,7 @@ import { customElement, property } from 'lit/decorators.js'
 import type { NamedNode } from '@rdfjs/types'
 import { findNodes } from 'clownface-shacl-path'
 import { consumeFocusNode } from '../mixins/focusNode.js'
-import { toPropertyPath } from '../lib/converter.js'
+import { toPropertyPath } from '../converter.js'
 
 @customElement('resource-link')
 export class ResourceLink extends consumeFocusNode(LitElement) {
