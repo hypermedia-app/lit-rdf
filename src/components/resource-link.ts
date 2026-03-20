@@ -2,16 +2,24 @@ import { html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import type { NamedNode } from '@rdfjs/types'
 import { findNodes } from 'clownface-shacl-path'
-import { consumeFocusNode } from '../mixins/focusNode.js'
 import { toPropertyPath } from '../converter.js'
+import { FocusNode } from '../controllers/FocusNode.js'
 
 @customElement('resource-link')
-export class ResourceLink extends consumeFocusNode(LitElement) {
+export class ResourceLink extends LitElement {
   @property({ type: Object, converter: toPropertyPath })
-    property?: NamedNode
+  public property?: NamedNode
+
+  private readonly focusNode: FocusNode
+
+  constructor() {
+    super()
+
+    this.focusNode = new FocusNode(this)
+  }
 
   render() {
-    if (!this.focusNode) {
+    if (!this.focusNode.pointer) {
       return html`
                 <slot></slot>`
     }
@@ -19,11 +27,11 @@ export class ResourceLink extends consumeFocusNode(LitElement) {
     let href
 
     if (this.property) {
-      href = findNodes(this.focusNode, this.property).value
+      href = findNodes(this.focusNode.pointer, this.property).value
     }
 
     if (!href) {
-      href = this.focusNode.value
+      href = this.focusNode.pointer.value
     }
 
     return html`<a href="${href}">

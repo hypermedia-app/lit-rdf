@@ -1,15 +1,20 @@
 import type { Preview } from '@storybook/web-components-vite'
-import $rdf from '@zazuko/env'
+import $rdf from '@zazuko/env/web.js'
 import stringToStream from 'string-to-stream'
 import process from 'process'
 import { Buffer } from 'buffer'
 import EventEmitter from 'events'
 
 import './load-graph.js'
+import {Quad} from "@rdfjs/types";
 
 window.Buffer = Buffer
 window.process = process
 window.EventEmitter = EventEmitter
+
+declare module '@rdfjs/types' {
+  interface Stream extends AsyncGenerator<Quad> {}
+}
 
 const preview: Preview = {
   parameters: {
@@ -26,12 +31,13 @@ const preview: Preview = {
     },
   },
   loaders: [async ({ args }: Record<any, any>) => {
-    let data = $rdf.clownface()
+    const dataset = $rdf.dataset()
+    let data = $rdf.clownface({ dataset })
     if (args.data) {
-      data = $rdf.clownface({
-        dataset: await $rdf.dataset()
-          .import($rdf.formats.parsers.import('text/turtle', stringToStream(args.data.toString()))!),
-      })
+      const stream = $rdf.formats.parsers.import('text/turtle', stringToStream(args.data.toString()))!
+      for await (const quad of stream) {
+        dataset.add(quad)
+      }
     }
 
     return {

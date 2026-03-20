@@ -4,9 +4,10 @@
   "type": "module",
   "scripts": {
     "prepare": "husky",
-    "lint": "eslint . --quiet --ignore-path .gitignore",
+    "lint": "eslint . --quiet --ignore-path .gitignore --ignore-path .eslintignore",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "test": "vitest --project=storybook",
     "build": "tsc",
     "prepack": "npm run build",
     "release": "changeset publish"
