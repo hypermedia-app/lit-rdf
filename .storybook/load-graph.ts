@@ -1,10 +1,15 @@
-import $rdf from '@zazuko/env'
+import $rdf from '@zazuko/env/web.js'
 import formats from '@rdfjs/formats'
 import stream from 'readable-stream'
-import type DataGraph from "../components/data-graph.js";
+import DataGraph from "../src/components/data-graph.js";
 import {AnyPointer} from "clownface";
+import {Quad} from "@rdfjs/types";
 
 $rdf.formats.import(formats)
+
+declare module '@rdfjs/types' {
+  interface Stream extends AsyncGenerator<Quad> {}
+}
 
 const scriptGraphs = new WeakMap<HTMLScriptElement, AnyPointer>()
 
@@ -21,7 +26,9 @@ async function parseGraphs() {
         const dataset = $rdf.dataset()
         const quads = $rdf.formats.parsers.import(mediaType, stream.Readable.from(script.textContent))
         if (quads) {
-          await dataset.import(quads)
+          for await (const quad of quads) {
+            dataset.add(quad)
+          }
           graph = $rdf.clownface({ dataset })
           scriptGraphs.set(script, graph)
         }

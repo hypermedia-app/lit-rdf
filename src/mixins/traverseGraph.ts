@@ -7,12 +7,16 @@ import type { PropertyValues } from 'lit'
 import { focusNode as context } from '../context.js'
 import { toPropertyPath } from '../converter.js'
 import type { LitElementConstructor } from '../constructor.js'
-import { consumeFocusNode } from './focusNode.js'
+import { FocusNode } from '../controllers/FocusNode.js'
 
 export function traverseGraph<T extends LitElementConstructor>(Base: T) {
-  class TraverseGraph extends consumeFocusNode(Base) {
+  class TraverseGraph extends Base {
+    private readonly focusNode: FocusNode
+
     constructor(...args: any[]) {
       super(...args)
+
+      this.focusNode = new FocusNode(this)
     }
 
     @property({ type: Object, converter: toPropertyPath, attribute: 'property-path' })
@@ -29,8 +33,8 @@ export function traverseGraph<T extends LitElementConstructor>(Base: T) {
     }
 
     setObjectNode() {
-      if (this.propertyPath && this.focusNode) {
-        this.objectNode = findNodes(this.focusNode, this.propertyPath)
+      if (this.propertyPath && this.focusNode.pointer) {
+        this.objectNode = findNodes(this.focusNode.pointer, this.propertyPath)
       }
     }
   }

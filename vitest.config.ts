@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { defineConfig } from 'vitest/config';
+import { coverageConfigDefaults, defineConfig } from 'vitest/config';
 
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 
@@ -13,6 +13,13 @@ const dirname =
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   test: {
+    coverage: {
+      exclude: [
+        ...coverageConfigDefaults.exclude,
+        '**/.storybook/**',
+        '**/stories/**',
+        '**/storybook-static/**',      ]
+    },
     projects: [
       {
         extends: true,

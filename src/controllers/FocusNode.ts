@@ -12,11 +12,17 @@ export class FocusNode {
     this.focusNodeConsumer = new ContextConsumer(host, {
       context: focusNode,
       subscribe: true,
+      callback() {
+        host.requestUpdate()
+      },
     })
 
     this.sortCriteriaConsumer = new ContextConsumer(host, {
       context: sortCriteria,
       subscribe: true,
+      callback() {
+        host.requestUpdate()
+      },
     })
   }
 
