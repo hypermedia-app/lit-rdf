@@ -1,10 +1,10 @@
-import type {Meta, StoryObj} from '@storybook/web-components-vite'
-import {expect, waitFor} from 'storybook/test';
+import type { Meta, StoryObj } from '@storybook/web-components-vite'
+import { expect, waitFor } from 'storybook/test' // eslint-disable-line import/no-unresolved
+import $rdf from '@zazuko/env/web.js'
+import type { ResourceLabel } from '../src/components/resource-label.js'
+import type TargetNode from '../src/components/target-node.js'
 import * as BasicExamples from './BasicExamples.js'
-import {ResourceLabel} from "../src/components/resource-label.js";
-import $rdf from "@zazuko/env/web.js";
-import {ResourceLabelProps} from "./BasicExamples.js";
-import TargetNode from '../src/components/target-node.js';
+import type { ResourceLabelProps } from './BasicExamples.js'
 
 const meta = {
   title: 'Getting started',
@@ -29,7 +29,7 @@ export const NodeLabel: StoryObj<ResourceLabelProps> = {
     targetNode: 'http://example.com/foo',
     labelProp: 'skos:prefLabel',
   },
-  async play({canvasElement, step}) {
+  async play({ canvasElement, step }) {
     const resourceLabel = canvasElement.querySelector('resource-label') as ResourceLabel
 
     await step('Initial value', async () => {
@@ -57,5 +57,5 @@ export const NodeLabel: StoryObj<ResourceLabelProps> = {
         expect(resourceLabel?.shadowRoot).toHaveTextContent('The Bar')
       })
     })
-  }
+  },
 }

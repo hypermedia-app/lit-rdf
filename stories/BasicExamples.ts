@@ -3,7 +3,7 @@ import '../src/components/data-graph.js'
 import '../src/components/target-node.js'
 import '../src/components/resource-label.js'
 import '../src/components/rdf-environment.js'
-import { ifDefined } from "lit/directives/if-defined.js"
+import { ifDefined } from 'lit/directives/if-defined.js'
 
 export interface ResourceLabelProps {
   labelProp?: string
