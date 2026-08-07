@@ -1,16 +1,9 @@
 import type { Preview } from '@storybook/web-components-vite'
 import $rdf from '@zazuko/env/web.js'
 import stringToStream from 'string-to-stream'
-import process from 'process'
-import { Buffer } from 'buffer'
-import EventEmitter from 'events'
 
 import './load-graph.js'
 import {Quad} from "@rdfjs/types";
-
-window.Buffer = Buffer
-window.process = process
-window.EventEmitter = EventEmitter
 
 declare module '@rdfjs/types' {
   interface Stream extends AsyncGenerator<Quad> {}
