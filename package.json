@@ -58,6 +58,7 @@
     "@typescript-eslint/parser": "^7",
     "@vitest/browser-playwright": "^4.0.18",
     "@vitest/coverage-v8": "^4.0.18",
+    "@vocabulary/rdfs": "^1.0.6",
     "eslint-import-resolver-typescript": "^2",
     "eslint-plugin-storybook": "^10.2.12",
     "husky": "^9.1.7",

@@ -2,11 +2,12 @@ import type { ReactiveControllerHost } from 'lit'
 import type { Context } from '@lit/context'
 import { ContextConsumer } from '@lit/context'
 import type { GraphPointer, MultiPointer } from 'clownface'
-import { focusNode, sortCriteria } from '../context.js'
+import { focusNode, sortPredicate, sortDirection } from '../context.js'
 
 export class FocusNode {
   private focusNodeConsumer: ContextConsumer<Context<unknown, MultiPointer | undefined>, ReactiveControllerHost & HTMLElement>
-  private sortCriteriaConsumer
+  private sortPredicateConsumer
+  private sortDirectionConsumer
 
   constructor(host: ReactiveControllerHost & HTMLElement) {
     this.focusNodeConsumer = new ContextConsumer(host, {
@@ -17,8 +18,16 @@ export class FocusNode {
       },
     })
 
-    this.sortCriteriaConsumer = new ContextConsumer(host, {
-      context: sortCriteria,
+    this.sortPredicateConsumer = new ContextConsumer(host, {
+      context: sortPredicate,
+      subscribe: true,
+      callback() {
+        host.requestUpdate()
+      },
+    })
+
+    this.sortDirectionConsumer = new ContextConsumer(host, {
+      context: sortDirection,
       subscribe: true,
       callback() {
         host.requestUpdate()
@@ -32,14 +41,19 @@ export class FocusNode {
 
   get array(): GraphPointer[] | undefined {
     const array = this.pointer?.toArray()
-    const sortPredicate = this.sortCriteriaConsumer.value
+    const sortPredicateFunc = this.sortPredicateConsumer.value
+    const sortDirectionValue = this.sortDirectionConsumer.value
 
-    if (!array || !sortPredicate) {
+    if (!array || !sortPredicateFunc) {
       return array
     }
 
     return array.sort((left, right) => {
-      return left.out(sortPredicate).value?.localeCompare(right.out(sortPredicate).value || '') || 0
+      if (sortDirectionValue === 'desc') {
+        return sortPredicateFunc(right)?.localeCompare(sortPredicateFunc(left) || '') || 0
+      }
+
+      return sortPredicateFunc(left)?.localeCompare(sortPredicateFunc(right) || '') || 0
     })
   }
 }
