@@ -69,7 +69,7 @@
     "string-to-stream": "^3.0.1",
     "typescript": "^5",
     "util": "^0.12.5",
-    "vitest": "^4.0.18"
+    "vitest": "^4.1.0"
   },
   "lint-staged": {
     "*.{js,ts}": [
