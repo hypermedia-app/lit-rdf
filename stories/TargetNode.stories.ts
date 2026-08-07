@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite'
-import { expect, waitFor } from 'storybook/test' // eslint-disable-line import/no-unresolved
+import { expect, waitFor } from 'storybook/test'
 import type TargetNode from '../src/components/target-node.js'
 import * as Examples from './TargetNodeExamples.js'
 import type { SortingTargetNodesProps, SortOrderProps } from './TargetNodeExamples.js'
@@ -140,8 +140,8 @@ export const SortOrder: StoryObj<SortOrderProps> = {
   },
 }
 
-function getInspectedCell(targetNode: Element, { row = 1, column = 1 }: { row?: number; column?: number} = {}) {
-  return new Promise<Element>(resolve => {
+function getInspectedCell(targetNode: Element, { row = 1, column = 1 }: { row?: number, column?: number } = {}) {
+  return new Promise<Element>((resolve) => {
     const interval = setInterval(() => {
       const el = targetNode
         ?.querySelector('vocabulary-table')

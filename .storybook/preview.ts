@@ -3,7 +3,7 @@ import $rdf from '@zazuko/env/web.js'
 import stringToStream from 'string-to-stream'
 
 import './load-graph.js'
-import {Quad} from "@rdfjs/types";
+import type { Quad } from '@rdfjs/types'
 
 declare module '@rdfjs/types' {
   interface Stream extends AsyncGenerator<Quad> {}
@@ -13,17 +13,17 @@ const preview: Preview = {
   parameters: {
     docs: {
       canvas: {
-        sourceState: 'hidden'
-      }
+        sourceState: 'hidden',
+      },
     },
     controls: {
       matchers: {
-       color: /(background|color)$/i,
-       date: /Date$/i,
+        color: /(background|color)$/i,
+        date: /Date$/i,
       },
     },
   },
-  loaders: [async ({ args }: Record<any, any>) => {
+  loaders: [async ({ args }: Record<string, any>) => { // eslint-disable-line @typescript-eslint/no-explicit-any
     const dataset = $rdf.dataset()
     let data = $rdf.clownface({ dataset })
     if (args.data) {
@@ -36,7 +36,7 @@ const preview: Preview = {
     return {
       data,
     }
-  }]
-};
+  }],
+}
 
-export default preview;
+export default preview

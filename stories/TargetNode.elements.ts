@@ -23,7 +23,7 @@ class VocabularyTable extends LitElement {
         </tr>
         </thead>
         <tbody>
-        ${this.focusNode.array?.map((item) => html`
+        ${this.focusNode.array?.map(item => html`
           <tr>
             <td>${shrink(item.value)}</td>
             <td>

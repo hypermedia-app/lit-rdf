@@ -25,7 +25,7 @@ export const toNamedNode = {
 }
 
 export const toPropertyPath: ComplexAttributeConverter = {
-  fromAttribute(value: string | null, type?: unknown): ShaclPropertyPath {
+  fromAttribute(value: string | null): ShaclPropertyPath {
     if (typeof value === 'undefined' || value === null) {
       throw new Error('PropertyPath converter: value is null')
     }
