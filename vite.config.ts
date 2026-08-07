@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
-import rollupNodePolyFill from 'rollup-plugin-polyfill-node'
+import nodePolyfills from "@rolldown/plugin-node-polyfills";
 
 export default {
   define: {
@@ -9,23 +8,11 @@ export default {
   resolve: {
     alias: {
       stream: 'readable-stream',
-      zlib: 'browserify-zlib',
-      util: 'util',
-    },
-  },
-  optimizeDeps: {
-    esbuildOptions: {
-      plugins: [
-        NodeGlobalsPolyfillPlugin({
-          process: true,
-          buffer: true,
-        }),
-      ],
     },
   },
   build: {
-    rollupOptions: {
-      plugins: [rollupNodePolyFill()],
-    },
+    rolldownOptions: {
+      plugins: [nodePolyfills()]
+    }
   },
 }

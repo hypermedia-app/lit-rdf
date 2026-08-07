@@ -1,11 +1,9 @@
 import { html, LitElement } from 'lit'
-import { customElement } from 'lit/decorators.js'
 import { shrink } from '@zazuko/prefixes'
 import { FocusNode } from '../src/controllers.js'
 import '../src/components/focus-node.js'
 import '../src/components/resource-label.js'
 
-@customElement('vocabulary-table')
 class VocabularyTable extends LitElement {
   private focusNode: FocusNode
 
@@ -25,24 +23,25 @@ class VocabularyTable extends LitElement {
         </tr>
         </thead>
         <tbody>
-        ${this.focusNode.array?.map((item) =>
-    html`
-            <tr>
-              <td>${shrink(item.value)}</td>
-              <td>
-                <focus-node .focusNode=${item}>
+        ${this.focusNode.array?.map((item) => html`
+          <tr>
+            <td>${shrink(item.value)}</td>
+            <td>
+              <focus-node .focusNode="${item}">
                 <resource-label predicate="rdfs:label">
                 </resource-label>
-                </focus-node>
-              </td>
-              <td>
-                <focus-node .focusNode=${item}>
-                  <resource-label predicate="rdfs:comment">
-                  </resource-label>
-                </focus-node>
-              </td>
-            </tr>`)}
+              </focus-node>
+            </td>
+            <td>
+              <focus-node .focusNode="${item}">
+                <resource-label predicate="rdfs:comment">
+                </resource-label>
+              </focus-node>
+            </td>
+          </tr>`)}
         </tbody>
       </table>`
   }
 }
+
+customElements.define('vocabulary-table', VocabularyTable)
