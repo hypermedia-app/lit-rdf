@@ -1,5 +1,11 @@
 # lit-rdf
 
+## 0.2.1
+
+### Patch Changes
+
+- 02c819c: Added `order-dir` and function-based `orderBy` to `<target-node>`
+
 ## 0.2.0
 
 ### Minor Changes
