@@ -20,7 +20,7 @@ const preview: Preview = {
   parameters: {
     docs: {
       canvas: {
-        sourceState: 'shown'
+        sourceState: 'hidden'
       }
     },
     controls: {

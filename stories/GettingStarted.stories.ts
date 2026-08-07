@@ -29,6 +29,30 @@ export const NodeLabel: StoryObj<ResourceLabelProps> = {
     targetNode: 'http://example.com/foo',
     labelProp: 'skos:prefLabel',
   },
+  parameters: {
+    docs: {
+      canvas: {
+        sourceState: 'shown',
+      },
+    },
+  },
+  argTypes: {
+    targetNode: {
+      control: 'radio',
+      options: ['http://example.com/foo', 'http://example.com/bar'],
+      description: 'Corresponds to the `target-node` attribute of `<target-node>`',
+    },
+    labelProp: {
+      control: 'radio',
+      options: ['skos:prefLabel', 'rdfs:label'],
+      description: 'Corresponds to the `predicate` attribute of `<resource-label>`',
+      table: {
+        defaultValue: {
+          summary: 'rdfs:label',
+        },
+      },
+    },
+  },
   async play({ canvasElement, step }) {
     const resourceLabel = canvasElement.querySelector('resource-label') as ResourceLabel
 

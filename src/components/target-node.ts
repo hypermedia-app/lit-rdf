@@ -1,10 +1,10 @@
 import { css, html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import type { NamedNode } from '@rdfjs/types'
 import { provide } from '@lit/context'
 import { provideTargetNode } from '../mixins/targetNode.js'
-import { toNamedNode } from '../converter.js'
-import { sortCriteria } from '../context.js'
+import { toSortPredicate } from '../converter.js'
+import type { SortPredicate } from '../context.js'
+import { sortDirection, sortPredicate } from '../context.js'
 
 @customElement('target-node')
 export default class extends provideTargetNode(LitElement) {
@@ -14,9 +14,13 @@ export default class extends provideTargetNode(LitElement) {
         }
     `
 
-  @property({ type: Object, attribute: 'order-by', converter: toNamedNode })
-  @provide({ context: sortCriteria })
-  public orderBy: NamedNode | undefined
+  @property({ type: Object, attribute: 'order-by', converter: toSortPredicate })
+  @provide({ context: sortPredicate })
+  public orderBy: SortPredicate | undefined
+
+  @property({ type: String, attribute: 'order-dir', reflect: true })
+  @provide({ context: sortDirection })
+  public orderDir: 'asc' | 'desc' = 'asc'
 
   render() {
     return html`<slot></slot>`
