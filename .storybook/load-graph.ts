@@ -1,9 +1,9 @@
 import $rdf from '@zazuko/env/web.js'
 import formats from '@rdfjs/formats'
 import stream from 'readable-stream'
-import DataGraph from "../src/components/data-graph.js";
-import {AnyPointer} from "clownface";
-import {Quad} from "@rdfjs/types";
+import type DataGraph from '../src/components/data-graph.js'
+import type { AnyPointer } from 'clownface'
+import type { Quad } from '@rdfjs/types'
 
 $rdf.formats.import(formats)
 
@@ -51,7 +51,7 @@ const mutationObserver = new MutationObserver(async () => {
   for (const target of targets) {
     const graphName = target.getAttribute('data-graph')
     if (!graphName) {
-      continue;
+      continue
     }
     if (graphs[graphName]) {
       target.graph = graphs[graphName]
@@ -59,4 +59,4 @@ const mutationObserver = new MutationObserver(async () => {
   }
 })
 
-mutationObserver.observe(document.body, {childList: true, subtree: true})
+mutationObserver.observe(document.body, { childList: true, subtree: true })

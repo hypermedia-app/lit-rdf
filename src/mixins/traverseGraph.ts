@@ -20,11 +20,11 @@ export function traverseGraph<T extends LitElementConstructor>(Base: T) {
     }
 
     @property({ type: Object, converter: toPropertyPath, attribute: 'property-path' })
-      propertyPath: ShaclPropertyPath | undefined
+    propertyPath: ShaclPropertyPath | undefined
 
     @provide({ context })
     @property()
-      objectNode: MultiPointer | undefined
+    objectNode: MultiPointer | undefined
 
     willUpdate(_changedProperties: PropertyValues) {
       if (_changedProperties.has('focusNode') || _changedProperties.has('propertyPath')) {

@@ -6,10 +6,6 @@ import type { LitElementConstructor, WithGraph } from '../constructor.js'
 
 export function provideGraph<T extends LitElementConstructor>(base: T) {
   class WithGraphProvider extends base {
-    constructor(...args: any[]) {
-      super(...args)
-    }
-
     @provide({ context: dataset })
     @state()
     public graph: AnyPointer | undefined

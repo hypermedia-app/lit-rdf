@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite'
-import { expect, waitFor } from 'storybook/test' // eslint-disable-line import/no-unresolved
+import { expect, waitFor } from 'storybook/test'
 import $rdf from '@zazuko/env/web.js'
 import type { ResourceLabel } from '../src/components/resource-label.js'
 import type TargetNode from '../src/components/target-node.js'

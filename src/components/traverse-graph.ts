@@ -12,10 +12,10 @@ export default class extends traverseGraph(LitElement) {
     `
 
   @property({ type: Object })
-    renderObjectNode?: (node: GraphPointer) => unknown
+  renderObjectNode?: (node: GraphPointer) => unknown
 
   @property({ type: Object })
-    renderObjectNodes?: (nodes: MultiPointer) => unknown
+  renderObjectNodes?: (nodes: MultiPointer) => unknown
 
   render() {
     if (!this.objectNode || this.objectNode.terms.length === 0) {
