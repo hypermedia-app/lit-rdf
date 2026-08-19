@@ -1,7 +1,4 @@
 import { html } from 'lit'
-import rdfs from '@vocabulary/rdfs'
-import env from '@zazuko/env/web.js'
-import toCanonical from 'rdf-dataset-ext/toCanonical.js'
 import './TargetNode.elements.js'
 import '../src/components/rdf-environment.js'
 import '../src/components/data-graph.js'
@@ -27,8 +24,7 @@ export const SortingTargetNodes = (props: SortingTargetNodesProps) => {
         </target-node>
       </data-graph>
     </rdf-environment>
-    <script id="rdfs vocabulary" data-graph="example" type="text/turtle">
-      ${toCanonical(env.dataset(rdfs({ factory: env })))}
+    <script data-graph="example" type="text/turtle" src="https://raw.githubusercontent.com/zazuko/rdf-vocabularies/refs/heads/master/ontologies/rdfs/rdfs.nq">
     </script>
   `
 }
@@ -46,8 +42,7 @@ export const CustomSortingTargetNodes = (props: Pick<SortingTargetNodesProps, 't
         </target-node>
       </data-graph>
     </rdf-environment>
-    <script id="rdfs vocabulary" data-graph="example" type="text/turtle">
-      ${toCanonical(env.dataset(rdfs({ factory: env })))}
+    <script data-graph="example" type="text/turtle" src="https://raw.githubusercontent.com/zazuko/rdf-vocabularies/refs/heads/master/ontologies/rdfs/rdfs.nq">
     </script>
   `
 }
@@ -69,8 +64,7 @@ export const SortOrderOfTargetNodes = (props: SortOrderProps) => {
         </target-node>
       </data-graph>
     </rdf-environment>
-    <script id="rdfs vocabulary" data-graph="example" type="text/turtle">
-      ${toCanonical(env.dataset(rdfs({ factory: env })))}
+    <script data-graph="example" type="text/turtle" src="https://raw.githubusercontent.com/zazuko/rdf-vocabularies/refs/heads/master/ontologies/rdfs/rdfs.nq">
     </script>
   `
 }

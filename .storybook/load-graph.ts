@@ -1,6 +1,6 @@
 import $rdf from '@zazuko/env/web.js'
 import formats from '@rdfjs/formats'
-import stream from 'readable-stream'
+import { Readable } from 'readable-stream'
 import type DataGraph from '../src/components/data-graph.js'
 import type { AnyPointer } from 'clownface'
 import type { Quad } from '@rdfjs/types'
@@ -23,15 +23,8 @@ async function parseGraphs() {
     if (mediaType && graphName) {
       let graph = scriptGraphs.get(script)
       if (!graph) {
-        const dataset = $rdf.dataset()
-        const quads = $rdf.formats.parsers.import(mediaType, stream.Readable.from(script.textContent))
-        if (quads) {
-          for await (const quad of quads) {
-            dataset.add(quad)
-          }
-          graph = $rdf.clownface({ dataset })
-          scriptGraphs.set(script, graph)
-        }
+        graph = await parseOrFetch(script, mediaType)
+        scriptGraphs.set(script, graph)
       }
 
       if (graph) {
@@ -41,6 +34,27 @@ async function parseGraphs() {
   }
 
   return graphs
+}
+
+async function parseOrFetch(script: HTMLScriptElement, mediaType: string) {
+  const dataset = $rdf.dataset()
+  let content: string | null | undefined
+
+  if (script.src) {
+    const response = await fetch(script.src)
+    content = await response.text()
+  }
+  else {
+    content = script.textContent
+  }
+
+  const stream = $rdf.formats.parsers.import(mediaType, Readable.from(content))
+  if (stream) {
+    for await (const quad of stream) {
+      dataset.add(quad)
+    }
+  }
+  return $rdf.clownface({ dataset })
 }
 
 const mutationObserver = new MutationObserver(async () => {

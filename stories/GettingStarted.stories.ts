@@ -29,13 +29,6 @@ export const NodeLabel: StoryObj<ResourceLabelProps> = {
     targetNode: 'http://example.com/foo',
     labelProp: 'skos:prefLabel',
   },
-  parameters: {
-    docs: {
-      canvas: {
-        sourceState: 'shown',
-      },
-    },
-  },
   argTypes: {
     targetNode: {
       control: 'radio',
