@@ -1,7 +1,7 @@
 import { createContext } from '@lit/context'
-import type { AnyPointer, GraphPointer, MultiPointer } from 'clownface'
+import type { GraphPointer, MultiPointer } from 'clownface'
 import type env from '@zazuko/env/web.js'
-import type { Term } from '@rdfjs/types'
+import type { DatasetCore, Term } from '@rdfjs/types'
 
 /**
  * Type representing the RDF/JS environment instance from `@zazuko/env`.
@@ -19,6 +19,7 @@ export interface SortPredicate {
  * Lit Context identifier for providing and consuming the RDF/JS Environment.
  */
 export const environment = createContext<Environment>(Symbol('environment'))
+<<<<<<< HEAD
 
 /**
  * Lit Context identifier for providing and consuming the ambient clownface Dataset / Graph pointer.
@@ -28,6 +29,9 @@ export const dataset = createContext<AnyPointer | undefined>(Symbol('dataset'))
 /**
  * Lit Context identifier for providing and consuming the current clownface Focus Node pointer(s).
  */
+=======
+export const dataset = createContext<DatasetCore[] | undefined>(Symbol('dataset'))
+>>>>>>> db9a963 (wip)
 export const focusNode = createContext<MultiPointer | undefined>(Symbol('focus-node'))
 
 /**

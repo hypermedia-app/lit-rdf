@@ -1,18 +1,24 @@
 import type { LitElement } from 'lit'
-import type { AnyPointer, MultiPointer } from 'clownface'
+import type { MultiPointer } from 'clownface'
 import type { Environment } from './context.js'
+import type { DatasetCore } from '@rdfjs/types'
 
 /**
  * Constructor type for LitElement classes and mixins.
  */
 export type LitElementConstructor<T = unknown> = new (...args: any[]) => T & LitElement
 
+<<<<<<< HEAD
 /**
  * Interface for elements providing a clownface dataset graph pointer.
  */
 export type WithGraph = {
   /** The clownface graph pointer. */
   graph: AnyPointer | undefined
+=======
+export type WithDataset = {
+  datasets: DatasetCore | undefined
+>>>>>>> db9a963 (wip)
 }
 
 /**

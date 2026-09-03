@@ -1,9 +1,6 @@
-import { css, html, LitElement } from 'lit'
-import { consume } from '@lit/context'
-import type { AnyPointer } from 'clownface'
-import { customElement, state } from 'lit/decorators.js'
-import { dataset } from '../context.js'
-import { provideGraph } from '../mixins/graph.js'
+import { css, LitElement, nothing } from 'lit'
+import { customElement } from 'lit/decorators.js'
+import { provideDataset } from '../mixins/datasetProvider.js'
 
 /**
  * A container element that consumes or provides an RDF dataset and exposes a Clownface
@@ -14,22 +11,13 @@ import { provideGraph } from '../mixins/graph.js'
  * @slot - Default slot for child elements that consume the RDF graph context.
  */
 @customElement('data-graph')
-export default class DataGraph extends provideGraph(LitElement) {
+export default class DataGraph extends provideDataset(LitElement) {
   static styles = css`
     :host {
-      display: contents;
+      display: none;
     }
   `
-
-  /**
-   * The parent clownface graph pointer consumed from the nearest ancestor context.
-   */
-  @consume({ context: dataset, subscribe: true })
-  @state()
-  public parent: AnyPointer | undefined
-
   render(): unknown {
-    return html`
-            <slot></slot>`
+    return nothing
   }
 }
