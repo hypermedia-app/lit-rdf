@@ -100,6 +100,15 @@ describe('sort utility', () => {
       expect(compareValues(date2, date1)).toBeGreaterThan(0)
       expect(compareValues(date1, new Date('2024-01-01'))).toBe(0)
     })
+
+    it('compares other comparable types using relational operators', () => {
+      expect(compareValues(10n, 20n)).toBe(-1)
+      expect(compareValues(20n, 10n)).toBe(1)
+    })
+
+    it('returns 0 for distinct non-primitive objects when neither is less nor greater', () => {
+      expect(compareValues({}, {})).toBe(0)
+    })
   })
 
   describe('sort comparator function', () => {
@@ -189,23 +198,29 @@ describe('sort utility', () => {
     it('handles nodes with missing sort properties in ascending and descending order', () => {
       const { node1, node2, ex } = createPointers()
       const cf = $rdf.clownface({ dataset: $rdf.dataset() })
-      const nodeNoProp = cf.node(ex.itemWithoutProp)
+      const nodeNoProp1 = cf.node(ex.itemWithoutProp1)
+      const nodeNoProp2 = cf.node(ex.itemWithoutProp2)
 
-      const list = [nodeNoProp, node1, node2]
+      const list = [nodeNoProp1, node1, node2]
 
       const sortedAsc = [...list].sort(sort((n: GraphPointer) => n.out(ex.label).term, 'asc'))
       expect(sortedAsc.map(n => n.value)).toEqual([
         'http://example.com/item2', // Apple
         'http://example.com/item1', // Cherry
-        'http://example.com/itemWithoutProp', // missing (undefined) sorts last in asc
+        'http://example.com/itemWithoutProp1', // missing (undefined) sorts last in asc
       ])
 
       const sortedDesc = [...list].sort(sort((n: GraphPointer) => n.out(ex.label).term, 'desc'))
       expect(sortedDesc.map(n => n.value)).toEqual([
         'http://example.com/item1', // Cherry
         'http://example.com/item2', // Apple
-        'http://example.com/itemWithoutProp', // missing (undefined) sorts last in desc
+        'http://example.com/itemWithoutProp1', // missing (undefined) sorts last in desc
       ])
+
+      const comparator = sort((n: GraphPointer) => n.out(ex.label).term)
+      expect(comparator(nodeNoProp1, nodeNoProp2)).toBe(0)
+      expect(comparator(nodeNoProp1, node1)).toBe(1)
+      expect(comparator(node1, nodeNoProp1)).toBe(-1)
     })
 
     it('supports custom predicate returning raw JS primitives', () => {
