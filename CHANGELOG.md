@@ -1,5 +1,12 @@
 # lit-rdf
 
+## 0.2.2
+
+### Patch Changes
+
+- af27103: Sorting numeric literals is now correctly based on value and not plain literal form
+- af27103: Added `<resource-value>` component
+
 ## 0.2.1
 
 ### Patch Changes
