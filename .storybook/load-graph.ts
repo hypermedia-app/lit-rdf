@@ -60,7 +60,7 @@ async function parseOrFetch(script: HTMLScriptElement, mediaType: string) {
 const mutationObserver = new MutationObserver(async () => {
   const graphs = await parseGraphs()
 
-  const targets = document.querySelectorAll<DataGraph>(`[data-graph]:not(script)`)
+  const targets = document.querySelectorAll<DataGraph>('[data-graph]:not(script)')
 
   for (const target of targets) {
     const graphName = target.getAttribute('data-graph')
