@@ -21,7 +21,21 @@ jobs:
           node-version: 'lts/*'
       - run: npm ci
       - run: npx playwright install
-      - run: npm run test -- --coverage
+      - run: npm run test:unit -- --coverage
+      - uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+  vitest-storybook:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 'lts/*'
+      - run: npm ci
+      - run: npx playwright install
+      - run: npm run test:storybook -- --coverage
       - uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

@@ -3,6 +3,9 @@ import type { Context } from '@lit/context'
 import { ContextConsumer } from '@lit/context'
 import type { GraphPointer, MultiPointer } from 'clownface'
 import { focusNode, sortPredicate, sortDirection } from '../context.js'
+import { sort } from '../sort.js'
+
+export { sort } from '../sort.js'
 
 export class FocusNode {
   private focusNodeConsumer: ContextConsumer<Context<unknown, MultiPointer | undefined>, ReactiveControllerHost & HTMLElement>
@@ -48,12 +51,6 @@ export class FocusNode {
       return array
     }
 
-    return array.sort((left, right) => {
-      if (sortDirectionValue === 'desc') {
-        return sortPredicateFunc(right)?.localeCompare(sortPredicateFunc(left) || '') || 0
-      }
-
-      return sortPredicateFunc(left)?.localeCompare(sortPredicateFunc(right) || '') || 0
-    })
+    return array.sort(sort(sortPredicateFunc, sortDirectionValue))
   }
 }

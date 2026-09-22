@@ -1,11 +1,12 @@
 import { createContext } from '@lit/context'
 import type { AnyPointer, GraphPointer, MultiPointer } from 'clownface'
 import type env from '@zazuko/env/web.js'
+import type { Term } from '@rdfjs/types'
 
 export type Environment = typeof env
 
 export interface SortPredicate {
-  (node: GraphPointer): string | undefined
+  (node: GraphPointer): Term | string | number | boolean | undefined
 }
 
 export const environment = createContext<Environment>(Symbol('environment'))

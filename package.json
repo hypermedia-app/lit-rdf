@@ -7,7 +7,8 @@
     "lint": "eslint . --quiet",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "vitest --project=storybook",
+    "test:storybook": "vitest --project=storybook",
+    "test:unit": "vitest",
     "build": "tsc",
     "prepack": "npm run build",
     "release": "changeset publish"
@@ -28,7 +29,8 @@
     "./constructor.js": "./src/constructor.js",
     "./mixins.js": "./src/mixins.js",
     "./controllers.js": "./src/controllers.js",
-    "./runtime/*.js": "./src/runtime/*.js"
+    "./runtime/*.js": "./src/runtime/*.js",
+    "./sort.js": "./src/sort.js"
   },
   "dependencies": {
     "@lit/context": "^1.1.6",
@@ -41,6 +43,7 @@
     "clownface-shacl-path": "^2.4.0",
     "is-url": "^1.2.4",
     "lit": "^3",
+    "rdf-literal": "^2.0.0",
     "sparql-path-parser": "^0.1.1"
   },
   "devDependencies": {
