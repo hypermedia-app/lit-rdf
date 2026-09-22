@@ -39,7 +39,7 @@ export const toSortPredicate: ComplexAttributeConverter = {
     const namedNode = toNamedNode.fromAttribute(value)
 
     return (node: GraphPointer) => {
-      return node.out(namedNode).value
+      return node.out(namedNode).term
     }
   },
 }

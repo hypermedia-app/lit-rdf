@@ -24,6 +24,8 @@ export class ResourceLabel extends LitElement {
       return html``
     }
 
-    return html`${localizedLabel(this.focusNode.pointer, { property: this.predicate })}`
+    const fallback = this.focusNode.pointer.out(this.predicate).value
+
+    return html`${localizedLabel(this.focusNode.pointer, { property: this.predicate, fallback })}`
   }
 }

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite'
 import { expect, waitFor } from 'storybook/test'
 import type TargetNode from '../src/components/target-node.js'
 import * as Examples from './TargetNodeExamples.js'
-import type { SortingTargetNodesProps, SortOrderProps } from './TargetNodeExamples.js'
+import type { SortingNumericAndBooleanProps, SortingTargetNodesProps, SortOrderProps } from './TargetNodeExamples.js'
 
 /**
  * In the examples below, `<target-node>` is used to display a list of nodes from the RDFS vocabulary.
@@ -135,6 +135,65 @@ export const SortOrder: StoryObj<SortOrderProps> = {
 
       await waitFor(() => {
         expect(thirdRowFirstCell).toHaveTextContent('rdfs:subPropertyOf')
+      })
+    })
+  },
+}
+
+export const SortingNumericAndBoolean: StoryObj<SortingNumericAndBooleanProps> = {
+  args: {
+    direction: 'desc',
+    orderBy: 'schema:age',
+  },
+  argTypes: {
+    orderBy: {
+      options: ['schema:age', 'schema:baseSalary', 'schema:birthDate'],
+      control: 'radio',
+    },
+    direction: {
+      options: ['asc', 'desc'],
+      control: 'radio',
+    },
+  },
+  render: Examples.SortingLiterals,
+  async play({ canvasElement, step }) {
+    const targetNode = canvasElement.querySelector<TargetNode>('target-node')!
+
+    await step('Sorted descending by age', async () => {
+      const firstRowFirstCell = await waitFor(() => getInspectedCell(targetNode, { row: 1 }))
+
+      await waitFor(() => {
+        expect(firstRowFirstCell).toHaveTextContent('http://example.org/charlie')
+      })
+    })
+
+    await step('Sorted ascending by age', async () => {
+      targetNode.setAttribute('order-dir', 'asc')
+
+      const firstRowFirstCell = await waitFor(() => getInspectedCell(targetNode, { row: 1 }))
+
+      await waitFor(() => {
+        expect(firstRowFirstCell).toHaveTextContent('http://example.org/fiona')
+      })
+    })
+
+    await step('Sorted ascending by salary', async () => {
+      targetNode.setAttribute('order-by', 'schema:baseSalary')
+
+      const firstRowFirstCell = await waitFor(() => getInspectedCell(targetNode, { row: 1 }))
+
+      await waitFor(() => {
+        expect(firstRowFirstCell).toHaveTextContent('http://example.org/edward')
+      })
+    })
+
+    await step('Sorted descending by salary', async () => {
+      targetNode.setAttribute('order-dir', 'desc')
+
+      const firstRowFirstCell = await waitFor(() => getInspectedCell(targetNode, { row: 1 }))
+
+      await waitFor(() => {
+        expect(firstRowFirstCell).toHaveTextContent('http://example.org/bob')
       })
     })
   },

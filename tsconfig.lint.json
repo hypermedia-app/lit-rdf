@@ -3,6 +3,7 @@
   "include": [
     "src",
     "stories",
+    "test",
     ".storybook/*.ts"
   ]
 }
