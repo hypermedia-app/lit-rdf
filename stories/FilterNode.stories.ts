@@ -81,14 +81,14 @@ export const CustomFilter: StoryObj<CustomFilterProps> = {
   async play({ canvasElement, step }) {
     const filterNode = canvasElement.querySelector<FilterNode>('filter-node')!
 
-    await step('Filter by hasBirthDate', async () => {
+    await step('Filter by birth date', async () => {
       const firstRow = await waitFor(() => getInspectedCell(filterNode, { row: 1 }))
       await waitFor(() => {
         expect(firstRow).toHaveTextContent('http://example.org/bob')
       })
     })
 
-    await step('Filter by highSalary', async () => {
+    await step('Filter by salary', async () => {
       filterNode.filter = (ptr: GraphPointer) => {
         const salary = ptr.out($rdf.ns.schema.baseSalary).value
         return salary ? Number(salary) >= 60000 : false
@@ -102,6 +102,19 @@ export const CustomFilter: StoryObj<CustomFilterProps> = {
       const secondRow = await waitFor(() => getInspectedCell(filterNode, { row: 2 }))
       await waitFor(() => {
         expect(secondRow).toHaveTextContent('http://example.org/diana')
+      })
+    })
+
+    await step('Filter removed', async () => {
+      filterNode.filter = undefined
+
+      await waitFor(() => {
+        const rows = filterNode
+          ?.querySelector('vocabulary-table')
+          ?.shadowRoot
+          ?.querySelectorAll('table tbody tr')
+
+        expect(rows).toHaveLength(6)
       })
     })
   },
