@@ -12,28 +12,33 @@ export class FocusNode {
   private sortPredicateConsumer
   private sortDirectionConsumer
 
+  public onChange?: () => void
+
   constructor(host: ReactiveControllerHost & HTMLElement) {
     this.focusNodeConsumer = new ContextConsumer(host, {
       context: focusNode,
       subscribe: true,
-      callback() {
+      callback: () => {
         host.requestUpdate()
+        this.onChange?.()
       },
     })
 
     this.sortPredicateConsumer = new ContextConsumer(host, {
       context: sortPredicate,
       subscribe: true,
-      callback() {
+      callback: () => {
         host.requestUpdate()
+        this.onChange?.()
       },
     })
 
     this.sortDirectionConsumer = new ContextConsumer(host, {
       context: sortDirection,
       subscribe: true,
-      callback() {
+      callback: () => {
         host.requestUpdate()
+        this.onChange?.()
       },
     })
   }
