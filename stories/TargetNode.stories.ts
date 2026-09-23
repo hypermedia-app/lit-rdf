@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite'
 import { expect, waitFor } from 'storybook/test'
 import type TargetNode from '../src/components/target-node.js'
 import * as Examples from './TargetNodeExamples.js'
-import type { SortingNumericAndBooleanProps, SortingTargetNodesProps, SortOrderProps } from './TargetNodeExamples.js'
+import type { SortingLiteralsProps, SortingTargetNodesProps, SortOrderProps } from './TargetNodeExamples.js'
 
 /**
  * In the examples below, `<target-node>` is used to display a list of nodes from the RDFS vocabulary.
@@ -140,7 +140,7 @@ export const SortOrder: StoryObj<SortOrderProps> = {
   },
 }
 
-export const SortingNumericAndBoolean: StoryObj<SortingNumericAndBooleanProps> = {
+export const SortingLiterals: StoryObj<SortingLiteralsProps> = {
   args: {
     direction: 'desc',
     orderBy: 'schema:age',
