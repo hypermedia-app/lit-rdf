@@ -3,6 +3,12 @@ import type { Literal, Term } from '@rdfjs/types'
 import { fromRdf } from 'rdf-literal'
 import type { SortPredicate } from './context.js'
 
+/**
+ * Converts an RDF term or primitive value to a comparable JavaScript value (number, date, string, boolean).
+ *
+ * @param value The RDF Term or raw primitive value to convert
+ * @returns A primitive value suitable for comparisons, or undefined/null if not present
+ */
 export function toComparable(value: Term | string | number | boolean | undefined | null): unknown {
   if (value === undefined || value === null) {
     return undefined
@@ -16,6 +22,13 @@ export function toComparable(value: Term | string | number | boolean | undefined
   return value
 }
 
+/**
+ * Compares two values for sorting, supporting strings, numbers, booleans, dates, and handling null/undefined.
+ *
+ * @param left First value to compare
+ * @param right Second value to compare
+ * @returns Negative number if left < right, positive number if left > right, or 0 if equal
+ */
 export function compareValues(left: unknown, right: unknown): number {
   if (left === right) {
     return 0
@@ -56,6 +69,13 @@ export function compareValues(left: unknown, right: unknown): number {
   return 0
 }
 
+/**
+ * Creates a comparator function for sorting Clownface GraphPointers using a predicate and sort direction.
+ *
+ * @param getValue Predicate function extracting the comparison key from each GraphPointer
+ * @param direction Sort order, either 'asc' (ascending) or 'desc' (descending)
+ * @returns Comparator function suitable for `Array.prototype.sort`
+ */
 export function sort(getValue: SortPredicate, direction: 'asc' | 'desc' = 'asc') {
   return (left: GraphPointer, right: GraphPointer): number => {
     const leftValue = toComparable(getValue(left))

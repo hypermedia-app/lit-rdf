@@ -8,6 +8,9 @@ import type { ShaclPropertyPath } from 'clownface-shacl-path'
 import type { GraphPointer } from 'clownface'
 import type { SortPredicate } from './context.js'
 
+/**
+ * Attribute converter that converts between prefixed or full URI strings and RDF/JS NamedNodes.
+ */
 export const toNamedNode = {
   fromAttribute(value: string | null): NamedNode {
     if (typeof value === 'undefined' || value === null) {
@@ -24,6 +27,9 @@ export const toNamedNode = {
   },
 }
 
+/**
+ * Attribute converter that parses SPARQL / SHACL property path strings into SHACL property path objects.
+ */
 export const toPropertyPath: ComplexAttributeConverter = {
   fromAttribute(value: string | null): ShaclPropertyPath {
     if (typeof value === 'undefined' || value === null) {
@@ -34,6 +40,9 @@ export const toPropertyPath: ComplexAttributeConverter = {
   },
 }
 
+/**
+ * Attribute converter that transforms an attribute string (property URI or prefix) into a sort predicate function.
+ */
 export const toSortPredicate: ComplexAttributeConverter = {
   fromAttribute(value: string | null): SortPredicate {
     const namedNode = toNamedNode.fromAttribute(value)
