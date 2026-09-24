@@ -7,4 +7,4 @@ import './components/resource-link.js'
 import './components/resource-value.js'
 import './components/filter-node.js'
 import './components/rdf-environment.js'
-import './custom-elements.d.ts'
+import './custom-elements.d.ts' // eslint-disable-line import-x/no-unresolved
