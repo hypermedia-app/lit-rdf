@@ -9,6 +9,13 @@ import { toPropertyPath } from '../converter.js'
 import type { LitElementConstructor } from '../constructor.js'
 import { FocusNode } from '../controllers/FocusNode.js'
 
+/**
+ * Mixin that adds graph traversal capabilities along a SHACL property path to a Lit element.
+ * Follows property paths starting from the ambient focus node and provides resolved object nodes in context.
+ *
+ * @param Base Base LitElement constructor class
+ * @returns Enhanced class providing graph traversal
+ */
 export function traverseGraph<T extends LitElementConstructor>(Base: T) {
   class TraverseGraph extends Base {
     private readonly focusNode: FocusNode
@@ -19,9 +26,15 @@ export function traverseGraph<T extends LitElementConstructor>(Base: T) {
       this.focusNode = new FocusNode(this)
     }
 
+    /**
+     * The SHACL property path or predicate URI used to traverse from the focus node.
+     */
     @property({ type: Object, converter: toPropertyPath, attribute: 'property-path' })
     propertyPath: ShaclPropertyPath | undefined
 
+    /**
+     * The clownface multi-pointer representing the object nodes resolved along the property path.
+     */
     @provide({ context })
     @property()
     objectNode: MultiPointer | undefined
