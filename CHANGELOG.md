@@ -1,5 +1,11 @@
 # lit-rdf
 
+## 0.2.3
+
+### Patch Changes
+
+- b3e31ed: Added `<filter-node>` element
+
 ## 0.2.2
 
 ### Patch Changes
