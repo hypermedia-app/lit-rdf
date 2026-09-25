@@ -1,6 +1,6 @@
 import { LitElement } from 'lit'
-import { FocusNode } from 'lit-rdf/controllers.js'
 import { customElement } from 'lit/decorators.js'
+import { FocusNode } from 'lit-rdf/controllers.js'
 
 /**
  * An element that formats and displays the value of the current focus node.

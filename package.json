@@ -59,10 +59,11 @@
     "@storybook/addon-docs": "^10.6.0",
     "@storybook/addon-vitest": "^10.6.0",
     "@storybook/web-components-vite": "^10.6.0",
-    "@tpluscode/eslint-config": "^3.0.1",
+    "@tpluscode/eslint-config": "^4.0.2",
     "@types/clownface": "^2.0.10",
     "@types/is-url": "^1.2.32",
     "@types/rdfjs__data-model": "^2.0.9",
+    "@types/readable-stream": "^4.0.24",
     "@typescript-eslint/eslint-plugin": "^8.66.0",
     "@typescript-eslint/parser": "^8.66.0",
     "@vitest/browser-playwright": "^4.1.11",
@@ -86,5 +87,8 @@
       "eslint --fix --quiet"
     ]
   },
-  "customElements": "custom-elements.json"
+  "customElements": "custom-elements.json",
+  "engines": {
+    "node": ">=21"
+  }
 }

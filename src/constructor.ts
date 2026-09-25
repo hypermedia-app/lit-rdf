@@ -1,7 +1,7 @@
 import type { LitElement } from 'lit'
 import type { MultiPointer } from 'clownface'
-import type { Environment } from './context.js'
 import type { DatasetCore } from '@rdfjs/types'
+import type { Environment } from './context.js'
 
 /**
  * Constructor type for LitElement classes and mixins.

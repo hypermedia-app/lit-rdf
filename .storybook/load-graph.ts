@@ -1,9 +1,9 @@
 import $rdf from '@zazuko/env/web.js'
 import formats from '@rdfjs/formats'
 import { Readable } from 'readable-stream'
-import type DataGraph from '../src/components/data-graph.js'
 import type { AnyPointer } from 'clownface'
 import type { Quad } from '@rdfjs/types'
+import type DataGraph from '../src/components/rdf-dataset.js'
 
 $rdf.formats.import(formats)
 

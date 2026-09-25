@@ -1,11 +1,11 @@
 import { html, LitElement } from 'lit'
 import { shrink } from '@zazuko/prefixes'
+import { repeat } from 'lit/directives/repeat.js'
 import { FocusNode } from '../src/controllers.js'
 import '../src/components/focus-node.js'
 import '../src/components/resource-label.js'
 import '../src/components/resource-value.js'
 import '../src/components/traverse-graph.js'
-import { repeat } from 'lit/directives/repeat.js'
 
 class VocabularyTable extends LitElement {
   private focusNode: FocusNode
