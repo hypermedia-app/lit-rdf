@@ -1,4 +1,4 @@
-import './components/data-graph.js'
+import './components/rdf-dataset.js'
 import './components/traverse-graph.js'
 import './components/focus-node.js'
 import './components/target-node.js'
@@ -7,4 +7,4 @@ import './components/resource-link.js'
 import './components/resource-value.js'
 import './components/filter-node.js'
 import './components/rdf-environment.js'
-import './custom-elements.d.ts' // eslint-disable-line import-x/no-unresolved, require-extensions/require-extensions
+import './custom-elements.js'

@@ -1,7 +1,7 @@
 import { html } from 'lit'
 import './TargetNode.elements.js'
 import '../src/components/rdf-environment.js'
-import '../src/components/data-graph.js'
+import '../src/components/rdf-dataset.js'
 import '../src/components/target-node.js'
 import '../src/components/filter-node.js'
 import type { GraphPointer } from 'clownface'
@@ -19,7 +19,8 @@ export const FilteringByAge = (props: FilteringByAgeProps) => {
 
   return html`
     <rdf-environment>
-      <data-graph data-graph="example">
+      <rdf-dataset>
+        <rdf-graph id="FilteringByAge"></rdf-graph>
         <p>
           Persons with age &ge; <b><code>${props.minAge}</code></b>
         </p>
@@ -29,7 +30,7 @@ export const FilteringByAge = (props: FilteringByAgeProps) => {
             </vocabulary-table>
           </filter-node>
         </target-node>
-      </data-graph>
+      </rdf-dataset>
     </rdf-environment>
     <script data-graph="example" type="text/turtle">
       @prefix ex: <http://example.org/> .
@@ -76,7 +77,8 @@ export const CustomFilter = (props: CustomFilterProps) => {
 
   return html`
     <rdf-environment>
-      <data-graph data-graph="example">
+      <rdf-dataset>
+        <rdf-graph id="CustomFilter"></rdf-graph>
         <p>
           Filtered by: <b><code>${props.filterType}</code></b>
         </p>
@@ -86,9 +88,9 @@ export const CustomFilter = (props: CustomFilterProps) => {
             </vocabulary-table>
           </filter-node>
         </target-node>
-      </data-graph>
+      </rdf-dataset>
     </rdf-environment>    
-    <script data-graph="example" type="text/turtle">
+    <script data-graph="CustomFilter" type="text/turtle">
       @prefix ex: <http://example.org/> .
       @prefix schema: <http://schema.org/> .
       @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .

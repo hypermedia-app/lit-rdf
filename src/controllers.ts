@@ -4,9 +4,9 @@
 export { FocusNode } from './controllers/FocusNode.js'
 
 /**
- * Reactive controller for managing graph dataset context.
+ * Reactive controller for managing dataset context.
  */
-export { Graph } from './controllers/Graph.js'
+export { Dataset } from './controllers/Dataset.js'
 
 /**
  * Reactive controller for managing RDF/JS environment context.

@@ -47,7 +47,7 @@ export const NodeLabel: StoryObj<ResourceLabelProps> = {
     },
   },
   async play({ canvasElement, step }) {
-    const resourceLabel = canvasElement.querySelector('resource-label') as ResourceLabel
+    const resourceLabel = canvasElement.querySelector('resource-label') as unknown as ResourceLabel
 
     await step('Initial value', async () => {
       await waitFor(() => {
@@ -68,7 +68,7 @@ export const NodeLabel: StoryObj<ResourceLabelProps> = {
     })
 
     await step('Target changed', async () => {
-      const targetNode = canvasElement.querySelector('target-node') as TargetNode
+      const targetNode = canvasElement.querySelector('target-node') as unknown as TargetNode
       targetNode.targetNode = $rdf.namedNode('http://example.com/bar')
       await waitFor(() => {
         expect(resourceLabel?.shadowRoot).toHaveTextContent('The Bar')

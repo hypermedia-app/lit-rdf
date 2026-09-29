@@ -1,9 +1,8 @@
 import $rdf from '@zazuko/env/web.js'
 import formats from '@rdfjs/formats'
 import { Readable } from 'readable-stream'
-import type { AnyPointer } from 'clownface'
-import type { Quad } from '@rdfjs/types'
-import type DataGraph from '../src/components/rdf-dataset.js'
+import type { DatasetCore, Quad } from '@rdfjs/types'
+import '../src/custom-elements.d.ts'
 
 $rdf.formats.import(formats)
 
@@ -11,10 +10,10 @@ declare module '@rdfjs/types' {
   interface Stream extends AsyncGenerator<Quad> {}
 }
 
-const scriptGraphs = new WeakMap<HTMLScriptElement, AnyPointer>()
+const scriptGraphs = new WeakMap<HTMLScriptElement, DatasetCore>()
 
 async function parseGraphs() {
-  const graphs: Record<string, AnyPointer> = {}
+  const graphs: Record<string, DatasetCore> = {}
 
   for (const script of document.querySelectorAll<HTMLScriptElement>('script[data-graph]')) {
     const graphName = script.getAttribute('data-graph')
@@ -54,21 +53,21 @@ async function parseOrFetch(script: HTMLScriptElement, mediaType: string) {
       dataset.add(quad)
     }
   }
-  return $rdf.clownface({ dataset })
+  return dataset
 }
 
 const mutationObserver = new MutationObserver(async () => {
   const graphs = await parseGraphs()
 
-  const targets = document.querySelectorAll<DataGraph>('[data-graph]:not(script)')
+  const targets = document.querySelectorAll('rdf-graph')
 
   for (const target of targets) {
-    const graphName = target.getAttribute('data-graph')
+    const graphName = target.id
     if (!graphName) {
       continue
     }
     if (graphs[graphName]) {
-      target.graph = graphs[graphName]
+      target.value = graphs[graphName]
     }
   }
 })

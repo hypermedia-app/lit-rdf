@@ -15,7 +15,8 @@ npm install lit-rdf
 | Element | Description | Storybook |
 | --- | --- | --- |
 | [`<rdf-environment>`](src/components/rdf-environment.ts) | Provides an RDF/JS environment in the context for downstream elements. | - |
-| [`<data-graph>`](src/components/data-graph.ts) | Consumes an RDF dataset and provides a clownface graph pointer to child components. | - |
+| [`<rdf-dataset>`](src/components/rdf-dataset.ts) | Combines child `<rdf-graph>` elements into a single RDF dataset. | - |
+| [`<rdf-graph>`](src/components/rdf-graph.ts) | Data source for parent `<rdf-dataset>` elements. | - |
 | [`<target-node>`](src/components/target-node.ts) | Selects focus nodes from the graph (by type, predicate, or path) with optional sorting. | [Docs](https://hypermedia-app.github.io/lit-rdf/?path=/docs/target-node--docs) ([Source](stories/TargetNode.stories.ts)) |
 | [`<focus-node>`](src/components/focus-node.ts) | Sets or provides focus nodes in the context for child elements. | - |
 | [`<filter-node>`](src/components/filter-node.ts) | Filters the current focus nodes using clownface filter callbacks. | [Docs](https://hypermedia-app.github.io/lit-rdf/?path=/docs/filter-node--docs) ([Source](stories/FilterNode.stories.ts)) |
@@ -36,25 +37,28 @@ Compose them declaratively in your HTML or Lit templates:
 
 ```html
 <rdf-environment>
-  <data-graph .graph=${graph}>
-    <!-- Target person nodes and sort them by name -->
-    <target-node target-class="schema:Person" order-by="schema:name">
-      <!-- Filter nodes (e.g. by custom condition) -->
-      <filter-node .filter=${person => Number(person.out(ns.schema.age).value) >= 18}>
-        <article>
-          <!-- Display resource label and properties -->
-          <h2><resource-label></resource-label></h2>
-          <p>Homepage: <resource-link property="schema:url"></resource-link></p>
-
-          <!-- Traverse relations -->
-          <h3>Friends:</h3>
-          <traverse-graph property-path="schema:knows">
-            <p><resource-label></resource-label></p>
-          </traverse-graph>
-        </article>
-      </filter-node>
-    </target-node>
-  </data-graph>
+  <rdf-dataset id="graph2">
+    <!-- rdf-dataset combines the data from rdf-graph elements -->
+    <rdf-graph .value="${graph}">
+      <!-- Target person nodes and sort them by name -->
+      <target-node target-class="schema:Person" order-by="schema:name">
+        <!-- Filter nodes (e.g. by custom condition) -->
+        <filter-node .filter=${person => Number(person.out(ns.schema.age).value) >= 18}>
+          <article>
+            <!-- Display resource label and properties -->
+            <h2><resource-label></resource-label></h2>
+            <p>Homepage: <resource-link property="schema:url"></resource-link></p>
+  
+            <!-- Traverse relations -->
+            <h3>Friends:</h3>
+            <traverse-graph property-path="schema:knows">
+              <p><resource-label></resource-label></p>
+            </traverse-graph>
+          </article>
+        </filter-node>
+      </target-node>
+    </rdf-graph>
+  </rdf-dataset>
 </rdf-environment>
 ```
 

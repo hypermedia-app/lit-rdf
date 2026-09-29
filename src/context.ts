@@ -1,7 +1,7 @@
 import { createContext } from '@lit/context'
 import type { GraphPointer, MultiPointer } from 'clownface'
 import type env from '@zazuko/env/web.js'
-import type { DatasetCore, Term } from '@rdfjs/types'
+import type { DatasetCore, NamedNode, Term } from '@rdfjs/types'
 
 /**
  * Type representing the RDF/JS environment instance from `@zazuko/env`.
@@ -19,19 +19,22 @@ export interface SortPredicate {
  * Lit Context identifier for providing and consuming the RDF/JS Environment.
  */
 export const environment = createContext<Environment>(Symbol('environment'))
-<<<<<<< HEAD
+
+export interface DatasetProvider {
+  updateGraph: (host: HTMLElement, graph: DatasetCore, uri?: NamedNode) => void
+  removeGraph: (host: HTMLElement) => void
+}
+
+export const datasetProvider = createContext<DatasetProvider>(Symbol('datasetProvider'))
 
 /**
- * Lit Context identifier for providing and consuming the ambient clownface Dataset / Graph pointer.
+ * Lit Context identifier for providing and consuming the ambient RDF/JS Dataset
  */
-export const dataset = createContext<AnyPointer | undefined>(Symbol('dataset'))
+export const dataset = createContext<DatasetCore | undefined>(Symbol('dataset'))
 
 /**
  * Lit Context identifier for providing and consuming the current clownface Focus Node pointer(s).
  */
-=======
-export const dataset = createContext<DatasetCore[] | undefined>(Symbol('dataset'))
->>>>>>> db9a963 (wip)
 export const focusNode = createContext<MultiPointer | undefined>(Symbol('focus-node'))
 
 /**

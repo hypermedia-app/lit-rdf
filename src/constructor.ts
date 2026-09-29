@@ -8,17 +8,11 @@ import type { Environment } from './context.js'
  */
 export type LitElementConstructor<T = unknown> = new (...args: any[]) => T & LitElement
 
-<<<<<<< HEAD
 /**
- * Interface for elements providing a clownface dataset graph pointer.
+ * Interface for elements providing an RDF/JS dataset.
  */
-export type WithGraph = {
-  /** The clownface graph pointer. */
-  graph: AnyPointer | undefined
-=======
 export type WithDataset = {
   datasets: DatasetCore | undefined
->>>>>>> db9a963 (wip)
 }
 
 /**

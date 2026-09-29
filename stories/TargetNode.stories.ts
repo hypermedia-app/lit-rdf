@@ -9,7 +9,7 @@ import type { SortingLiteralsProps, SortingTargetNodesProps, SortOrderProps } fr
  * Check the `<vocabulary-table>` component for more information on how the focus nodes are consumed.
  */
 const meta = {
-  title: 'Target Node',
+  title: 'target-node',
   tags: ['autodocs'],
 } satisfies Meta
 

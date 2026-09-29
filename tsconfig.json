@@ -10,9 +10,11 @@
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "allowArbitraryExtensions": true,
-    "declaration": true
+    "declaration": true,
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "stories/**/*.ts",
+    ".storybook/**/*.ts"
   ]
 }

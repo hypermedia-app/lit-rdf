@@ -1,5 +1,6 @@
 import { html } from 'lit'
-import '../src/components/data-graph.js'
+import '../src/components/rdf-dataset.js'
+import '../src/components/rdf-graph.js'
 import '../src/components/target-node.js'
 import '../src/components/resource-label.js'
 import '../src/components/rdf-environment.js'
@@ -27,11 +28,13 @@ export const ResourceLabel = ({ labelProp, targetNode = 'http://example.com/foo'
       .
     </script>
     <rdf-environment>
-      <data-graph data-graph="example">
+      <rdf-dataset>
+        <rdf-graph id="example">
+        </rdf-graph>
         <target-node target-node="${targetNode}">
           <resource-label predicate="${ifDefined(labelProp)}"></resource-label>
         </target-node>
-      </data-graph>
+      </rdf-dataset>
     </rdf-environment>
   `
 }
