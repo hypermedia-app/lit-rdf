@@ -1,4 +1,5 @@
 import './components/rdf-dataset.js'
+import './components/rdf-graph.js'
 import './components/traverse-graph.js'
 import './components/focus-node.js'
 import './components/target-node.js'
