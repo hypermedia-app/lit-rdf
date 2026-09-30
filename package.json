@@ -3,7 +3,7 @@
   "version": "0.2.2",
   "type": "module",
   "scripts": {
-    "prepare": "husky",
+    "prepare": "husky && patch-package",
     "lint": "eslint . --quiet",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -75,6 +75,7 @@
     "eslint-plugin-storybook": "^10.5.7",
     "husky": "^9.1.7",
     "lint-staged": "^17.3.0",
+    "patch-package": "^8.0.1",
     "playwright": "^1.58.2",
     "storybook": "^10.6.0",
     "string-to-stream": "^3.0.1",
