@@ -50,6 +50,7 @@ interface HTMLRdfEnvironmentElement extends HTMLElement {
 
 
 interface HTMLRdfGraphElement extends HTMLElement {
+    env: Environment;
     /**
      * The RDF/JS dataset containing the graph triples to contribute to the parent dataset provider.
      */

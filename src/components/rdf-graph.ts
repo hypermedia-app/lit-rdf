@@ -1,10 +1,17 @@
 import { LitElement, nothing } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
-import type { DatasetCore, NamedNode } from '@rdfjs/types'
+import type { DataFactory, DatasetCore, NamedNode, Quad } from '@rdfjs/types'
 import { consume } from '@lit/context'
 import type { DatasetProvider } from '../context.js'
 import { datasetProvider } from '../context.js'
+import { Environment } from '../controllers/Environment.js'
 import { toNamedNode } from '../converter.js'
+
+declare global {
+  interface Window {
+    graphs?: Record<string, (options: { factory: DataFactory }) => Quad[]>
+  }
+}
 
 /**
  * Custom element (`<rdf-graph>`) that contributes an RDF graph dataset to an ancestor
@@ -14,6 +21,8 @@ import { toNamedNode } from '../converter.js'
  */
 @customElement('rdf-graph')
 export default class RdfGraph extends LitElement {
+  private readonly env: Environment
+
   /**
    * The RDF/JS dataset containing the graph triples to contribute to the parent dataset provider.
    */
@@ -30,6 +39,12 @@ export default class RdfGraph extends LitElement {
   @consume({ context: datasetProvider })
   private datasetProvider: DatasetProvider | undefined
 
+  constructor() {
+    super()
+
+    this.env = new Environment(this)
+  }
+
   protected updated(properties: Map<string, unknown>) {
     if (properties.has('value')) {
       if (this.value) {
@@ -43,6 +58,9 @@ export default class RdfGraph extends LitElement {
 
   connectedCallback() {
     super.connectedCallback()
+    if (!this.value && this.id && window.graphs?.[this.id]) {
+      this.value = this.env.value.dataset(window.graphs[this.id]({ factory: this.env.value }))
+    }
     if (this.value) {
       this.datasetProvider?.updateGraph(this, this.value, this.graph)
     }
