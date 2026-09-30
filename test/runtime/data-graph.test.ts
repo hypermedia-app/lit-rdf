@@ -36,7 +36,7 @@ describe('runtime/data-graph', () => {
   })
 
   async function loadDataGraph() {
-    await import('../../src/runtime/data-graph.ts')
+    await import('../../src/runtime/data-graph.js')
   }
 
   it('populates element value with a dataset created from window.graphs factory', async () => {
