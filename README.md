@@ -40,24 +40,25 @@ Compose them declaratively in your HTML or Lit templates:
   <rdf-dataset id="graph2">
     <!-- rdf-dataset combines the data from rdf-graph elements -->
     <rdf-graph .value="${graph}">
-      <!-- Target person nodes and sort them by name -->
-      <target-node target-class="schema:Person" order-by="schema:name">
-        <!-- Filter nodes (e.g. by custom condition) -->
-        <filter-node .filter=${person => Number(person.out(ns.schema.age).value) >= 18}>
-          <article>
-            <!-- Display resource label and properties -->
-            <h2><resource-label></resource-label></h2>
-            <p>Homepage: <resource-link property="schema:url"></resource-link></p>
-  
-            <!-- Traverse relations -->
-            <h3>Friends:</h3>
-            <traverse-graph property-path="schema:knows">
-              <p><resource-label></resource-label></p>
-            </traverse-graph>
-          </article>
-        </filter-node>
-      </target-node>
     </rdf-graph>
+
+    <!-- Target person nodes and sort them by name -->
+    <target-node target-class="schema:Person" order-by="schema:name">
+      <!-- Filter nodes (e.g. by custom condition) -->
+      <filter-node .filter=${person => Number(person.out(ns.schema.age).value) >= 18}>
+        <article>
+          <!-- Display resource label and properties -->
+          <h2><resource-label></resource-label></h2>
+          <p>Homepage: <resource-link property="schema:url"></resource-link></p>
+
+          <!-- Traverse relations -->
+          <h3>Friends:</h3>
+          <traverse-graph property-path="schema:knows">
+            <p><resource-label></resource-label></p>
+          </traverse-graph>
+        </article>
+      </filter-node>
+    </target-node>
   </rdf-dataset>
 </rdf-environment>
 ```
