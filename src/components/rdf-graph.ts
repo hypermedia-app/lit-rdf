@@ -6,11 +6,23 @@ import type { DatasetProvider } from '../context.js'
 import { datasetProvider } from '../context.js'
 import { toNamedNode } from '../converter.js'
 
+/**
+ * Custom element (`<rdf-graph>`) that contributes an RDF graph dataset to an ancestor
+ * `DatasetProvider` (such as `<rdf-dataset>`).
+ *
+ * @element rdf-graph
+ */
 @customElement('rdf-graph')
 export default class RdfGraph extends LitElement {
+  /**
+   * The RDF/JS dataset containing the graph triples to contribute to the parent dataset provider.
+   */
   @state()
   value: DatasetCore | undefined
 
+  /**
+   * Optional named graph URI for the contributed dataset. If omitted, the triples belong to the default graph.
+   */
   @property({ type: Object, converter: toNamedNode })
   graph: NamedNode | undefined
 

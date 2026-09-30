@@ -24,21 +24,39 @@ interface HTMLFocusNodeElement extends HTMLElement {
 interface HTMLRdfDatasetElement extends HTMLElement {
     graphs: Map<HTMLElement, { dataset: DatasetCore, graph: NamedNode | undefined }>;
     env: Environment;
+    /**
+     * The RDF/JS dataset representing the combined data graph provided in context to descendant elements.
+     */
     value: DatasetCore | undefined;
     provider: DatasetProvider;
+    /**
+     * Registers or updates a named or default graph contributed by a child element.
+     */
     updateGraph(host: HTMLElement, dataset: DatasetCore, graph: NamedNode | undefined): void;
+    /**
+     * Removes a graph previously registered by a child element.
+     */
     removeGraph(host: HTMLElement): void;
     updateDataset(): void;
 }
 
 
 interface HTMLRdfEnvironmentElement extends HTMLElement {
+    /**
+     * The RDF/JS environment instance provided in context to descendant elements.
+     */
     rdf: Environment;
 }
 
 
 interface HTMLRdfGraphElement extends HTMLElement {
+    /**
+     * The RDF/JS dataset containing the graph triples to contribute to the parent dataset provider.
+     */
     value: DatasetCore | undefined;
+    /**
+     * Optional named graph URI for the contributed dataset. If omitted, the triples belong to the default graph.
+     */
     graph: NamedNode | undefined;
     datasetProvider: DatasetProvider | undefined;
 }

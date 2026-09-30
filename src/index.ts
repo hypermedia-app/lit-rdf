@@ -1,3 +1,6 @@
+/**
+ * Entry point that registers all `lit-rdf` custom elements and ambient type definitions.
+ */
 import './components/rdf-dataset.js'
 import './components/rdf-graph.js'
 import './components/traverse-graph.js'

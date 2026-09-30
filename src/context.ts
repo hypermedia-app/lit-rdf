@@ -20,11 +20,33 @@ export interface SortPredicate {
  */
 export const environment = createContext<Environment>(Symbol('environment'))
 
+/**
+ * Interface for parent elements (such as `<rdf-dataset>`) that allow child elements
+ * to contribute RDF graph contents, combine them into a unified dataset, and provide
+ * the resulting dataset to consumers.
+ */
 export interface DatasetProvider {
+  /**
+   * Registers or updates a named or default graph contributed by a child element.
+   *
+   * @param host The hosting child element contributing the graph
+   * @param graph The RDF/JS dataset representing the graph
+   * @param uri Optional named graph URI
+   */
   updateGraph: (host: HTMLElement, graph: DatasetCore, uri?: NamedNode) => void
+
+  /**
+   * Removes a graph previously registered by a child element.
+   *
+   * @param host The hosting child element whose graph to remove
+   */
   removeGraph: (host: HTMLElement) => void
 }
 
+/**
+ * Lit Context identifier for providing and consuming the `DatasetProvider` interface,
+ * allowing child elements to register and remove graphs with their parent dataset provider.
+ */
 export const datasetProvider = createContext<DatasetProvider>(Symbol('datasetProvider'))
 
 /**

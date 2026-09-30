@@ -18,6 +18,9 @@ export default class RdfEnvironment extends LitElement {
       display: contents;
     }
   `
+  /**
+   * The RDF/JS environment instance provided in context to descendant elements.
+   */
   @state()
   @provide({ context })
   public rdf!: Environment

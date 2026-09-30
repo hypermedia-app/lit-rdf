@@ -26,6 +26,9 @@ export default class RdfDataset extends LitElement implements DatasetProvider {
 
   private env: Environment
 
+  /**
+   * The RDF/JS dataset representing the combined data graph provided in context to descendant elements.
+   */
   @provide({ context })
   @property({ type: Object })
   public value: DatasetCore | undefined
@@ -41,11 +44,23 @@ export default class RdfDataset extends LitElement implements DatasetProvider {
     this.provider = this
   }
 
+  /**
+   * Registers or updates a named or default graph contributed by a child element.
+   *
+   * @param host The hosting element contributing the graph
+   * @param dataset The RDF/JS dataset representing the graph
+   * @param graph Optional named graph URI
+   */
   updateGraph(host: HTMLElement, dataset: DatasetCore, graph: NamedNode | undefined): void {
     this.graphs.set(host, { dataset, graph })
     this.updateDataset()
   }
 
+  /**
+   * Removes a graph previously registered by a child element.
+   *
+   * @param host The hosting element whose graph to remove
+   */
   removeGraph(host: HTMLElement): void {
     this.graphs.delete(host)
     this.updateDataset()
