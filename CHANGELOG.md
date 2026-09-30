@@ -1,5 +1,16 @@
 # lit-rdf
 
+## 0.3.0
+
+### Minor Changes
+
+- 78012d0: Removed mixins `provideDataset`, `provideGraph`, `provideTargetNode` and `traverseGraph`. Their functionality is now provided by the respective elements.
+- 78012d0: Removed `data-graph` and introduced `rdf-dataset` and `rdf-graph` instead
+
+### Patch Changes
+
+- b3e31ed: Added `<filter-node>` element
+
 ## 0.2.2
 
 ### Patch Changes
