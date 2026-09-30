@@ -1,7 +1,7 @@
 import { createContext } from '@lit/context'
-import type { AnyPointer, GraphPointer, MultiPointer } from 'clownface'
+import type { GraphPointer, MultiPointer } from 'clownface'
 import type env from '@zazuko/env/web.js'
-import type { Term } from '@rdfjs/types'
+import type { DatasetCore, NamedNode, Term } from '@rdfjs/types'
 
 /**
  * Type representing the RDF/JS environment instance from `@zazuko/env`.
@@ -21,9 +21,38 @@ export interface SortPredicate {
 export const environment = createContext<Environment>(Symbol('environment'))
 
 /**
- * Lit Context identifier for providing and consuming the ambient clownface Dataset / Graph pointer.
+ * Interface for parent elements (such as `<rdf-dataset>`) that allow child elements
+ * to contribute RDF graph contents, combine them into a unified dataset, and provide
+ * the resulting dataset to consumers.
  */
-export const dataset = createContext<AnyPointer | undefined>(Symbol('dataset'))
+export interface DatasetProvider {
+  /**
+   * Registers or updates a named or default graph contributed by a child element.
+   *
+   * @param host The hosting child element contributing the graph
+   * @param graph The RDF/JS dataset representing the graph
+   * @param uri Optional named graph URI
+   */
+  updateGraph: (host: HTMLElement, graph: DatasetCore, uri?: NamedNode) => void
+
+  /**
+   * Removes a graph previously registered by a child element.
+   *
+   * @param host The hosting child element whose graph to remove
+   */
+  removeGraph: (host: HTMLElement) => void
+}
+
+/**
+ * Lit Context identifier for providing and consuming the `DatasetProvider` interface,
+ * allowing child elements to register and remove graphs with their parent dataset provider.
+ */
+export const datasetProvider = createContext<DatasetProvider>(Symbol('datasetProvider'))
+
+/**
+ * Lit Context identifier for providing and consuming the ambient RDF/JS Dataset
+ */
+export const dataset = createContext<DatasetCore | undefined>(Symbol('dataset'))
 
 /**
  * Lit Context identifier for providing and consuming the current clownface Focus Node pointer(s).

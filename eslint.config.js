@@ -19,6 +19,17 @@ export default [
   },
   globalIgnores(['!.storybook'], 'Include Storybook Directory'),
   {
+    files: [
+      '.storybook/*',
+      'stories/*',
+    ],
+    rules: {
+      'import-x/no-extraneous-dependencies': ['off', {
+        devDependencies: true
+      }]
+    }
+  },
+  {
     languageOptions: {
       parserOptions: {
         project: './tsconfig.lint.json',

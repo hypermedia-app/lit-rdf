@@ -1,0 +1,3 @@
+npm run analyze
+git add src/custom-elements.d.ts
+npx lint-staged

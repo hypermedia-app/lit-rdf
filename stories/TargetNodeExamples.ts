@@ -1,7 +1,8 @@
 import { html } from 'lit'
 import './TargetNode.elements.js'
 import '../src/components/rdf-environment.js'
-import '../src/components/data-graph.js'
+import '../src/components/rdf-dataset.js'
+import '../src/components/rdf-graph.js'
 import '../src/components/target-node.js'
 import { shrink } from '@zazuko/prefixes'
 import type { GraphPointer } from 'clownface'
@@ -14,7 +15,8 @@ export interface SortingTargetNodesProps {
 export const SortingTargetNodes = (props: SortingTargetNodesProps) => {
   return html`
     <rdf-environment>
-      <data-graph data-graph="example">
+      <rdf-dataset>
+        <rdf-graph id="SortingTargetNodes"></rdf-graph>
         <p>
           Instances of <b><code>${props.targetClass}</code></b> sorted by <b><code>${props.orderBy}</code></b>
         </p>
@@ -22,9 +24,9 @@ export const SortingTargetNodes = (props: SortingTargetNodesProps) => {
           <vocabulary-table>
           </vocabulary-table>
         </target-node>
-      </data-graph>
+      </rdf-dataset>
     </rdf-environment>
-    <script data-graph="example" type="text/turtle" src="https://raw.githubusercontent.com/zazuko/rdf-vocabularies/refs/heads/master/ontologies/rdfs/rdfs.nq">
+    <script data-graph="SortingTargetNodes" type="text/turtle" src="https://raw.githubusercontent.com/zazuko/rdf-vocabularies/refs/heads/master/ontologies/rdfs/rdfs.nq">
     </script>
   `
 }
@@ -32,7 +34,8 @@ export const SortingTargetNodes = (props: SortingTargetNodesProps) => {
 export const CustomSortingTargetNodes = (props: Pick<SortingTargetNodesProps, 'targetClass'>) => {
   return html`
     <rdf-environment>
-      <data-graph data-graph="example">
+      <rdf-dataset>
+        <rdf-graph id="CustomSortingTargetNodes"></rdf-graph>
         <p>
           Instances of <b><code>${props.targetClass}</code></b> sorted with <b><code>shrink</code></b> function
         </p>
@@ -40,9 +43,9 @@ export const CustomSortingTargetNodes = (props: Pick<SortingTargetNodesProps, 't
           <vocabulary-table>
           </vocabulary-table>
         </target-node>
-      </data-graph>
+      </rdf-dataset>
     </rdf-environment>
-    <script data-graph="example" type="text/turtle" src="https://raw.githubusercontent.com/zazuko/rdf-vocabularies/refs/heads/master/ontologies/rdfs/rdfs.nq">
+    <script data-graph="CustomSortingTargetNodes" type="text/turtle" src="https://raw.githubusercontent.com/zazuko/rdf-vocabularies/refs/heads/master/ontologies/rdfs/rdfs.nq">
     </script>
   `
 }
@@ -54,7 +57,8 @@ export interface SortOrderProps {
 export const SortOrderOfTargetNodes = (props: SortOrderProps) => {
   return html`
     <rdf-environment>
-      <data-graph data-graph="example">
+      <rdf-dataset>
+        <rdf-graph id="SortOrderOfTargetNodes"></rdf-graph>
         <p>
           Direction: <b><code>${props.direction}</code></b>
         </p>
@@ -62,9 +66,9 @@ export const SortOrderOfTargetNodes = (props: SortOrderProps) => {
           <vocabulary-table>
           </vocabulary-table>
         </target-node>
-      </data-graph>
+      </rdf-dataset>
     </rdf-environment>
-    <script data-graph="example" type="text/turtle" src="https://raw.githubusercontent.com/zazuko/rdf-vocabularies/refs/heads/master/ontologies/rdfs/rdfs.nq">
+    <script data-graph="SortOrderOfTargetNodes" type="text/turtle" src="https://raw.githubusercontent.com/zazuko/rdf-vocabularies/refs/heads/master/ontologies/rdfs/rdfs.nq">
     </script>
   `
 }
@@ -77,7 +81,8 @@ export interface SortingLiteralsProps {
 export const SortingLiterals = (props: SortingLiteralsProps) => {
   return html`
     <rdf-environment>
-      <data-graph data-graph="example">
+      <rdf-dataset>
+        <rdf-graph id="SortingLiterals"</rdf-graph>
         <p>
           Instances of <b><code>schema:Person</code></b> sorted by <b><code>${props.orderBy} ${props.direction}ending</code></b>
         </p>
@@ -89,9 +94,9 @@ export const SortingLiterals = (props: SortingLiteralsProps) => {
           <vocabulary-table additional-props='["schema:age", "schema:baseSalary", "schema:birthDate"]'>
           </vocabulary-table>
         </target-node>
-      </data-graph>
+      </rdf-dataset>
     </rdf-environment> 
-    <script data-graph="example" type="text/turtle">
+    <script data-graph="SortingLiterals" type="text/turtle">
       @prefix ex: <http://example.org/> .
       @prefix schema: <http://schema.org/> .
       @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .

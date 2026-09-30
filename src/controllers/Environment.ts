@@ -12,12 +12,14 @@ export class Environment<E extends context.Environment = context.Environment> {
    * Initializes the environment controller for the host element.
    *
    * @param host The hosting LitElement / ReactiveControllerHost
+   * @param callback Optional callback invoked whenever the environment becomes available or changes
    */
-  constructor(host: ReactiveControllerHost & HTMLElement) {
+  constructor(host: ReactiveControllerHost & HTMLElement, callback?: (value: E) => void) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     this.consumer = new ContextConsumer(host, {
       context: context.environment,
+      callback,
     })
   }
 

@@ -1,8 +1,8 @@
 import { css, html, LitElement, type PropertyValues } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
-import { FocusNode } from '../controllers/FocusNode.js'
 import type { MultiPointer } from 'clownface'
 import { provide } from '@lit/context'
+import { FocusNode } from '../controllers/FocusNode.js'
 import { focusNode } from '../context.js'
 
 /**

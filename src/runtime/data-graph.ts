@@ -1,3 +1,8 @@
+/**
+ * Runtime script that finds all `rdf-graph` elements in the DOM
+ * and populates their `.value` property with an RDF/JS Dataset initialized
+ * from graph factory functions registered on `window.graphs`.
+ */
 import factory from '@zazuko/env/web.js'
 import type { Quad } from '@rdfjs/types'
 
@@ -7,12 +12,8 @@ declare global {
   }
 }
 
-type DataGraphElement = Element & { graph?: ReturnType<typeof factory.clownface> }
-
-document.querySelectorAll('[data-graph]').forEach((el: DataGraphElement) => {
-  const graphName = el.getAttribute('data-graph')
-  if (graphName && window.graphs?.[graphName]) {
-    const dataset = factory.dataset(window.graphs[graphName]({ factory }))
-    el.graph = factory.clownface({ dataset })
+document.querySelectorAll('rdf-graph').forEach((el) => {
+  if (el.id && window.graphs?.[el.id]) {
+    el.value = factory.dataset(window.graphs[el.id]({ factory }))
   }
 })
