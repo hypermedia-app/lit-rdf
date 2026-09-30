@@ -9,7 +9,7 @@
     "build-storybook": "storybook build",
     "test:storybook": "vitest --project=storybook",
     "test:unit": "vitest --project=unit",
-    "test:components": "wtr",
+    "test:wtr": "wtr",
     "analyze": "cem analyze",
     "prebuild": "npm run analyze",
     "build": "tsc",
