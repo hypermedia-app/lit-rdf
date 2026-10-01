@@ -5,7 +5,7 @@ import { customElement } from 'lit/decorators.js'
 import { provide } from '@lit/context'
 import type { DataFactory, DatasetCore } from '@rdfjs/types'
 import $rdf from '@zazuko/env/web.js'
-import { datasetProvider, type DatasetProvider, environment, type Environment } from '../../src/context.js'
+import { datasetProvider, type DatasetProvider } from '../../src/context.js'
 import type RdfGraph from '../../src/components/rdf-graph.js'
 import '../../src/components/rdf-graph.js'
 
@@ -13,9 +13,6 @@ import '../../src/components/rdf-graph.js'
 class TestDataset extends LitElement implements DatasetProvider {
   @provide({ context: datasetProvider })
   provider: DatasetProvider = this
-
-  @provide({ context: environment })
-  rdf: Environment = $rdf
 
   updateGraph = sinon.spy()
   removeGraph = sinon.spy()
@@ -81,6 +78,38 @@ describe('rdf-graph', function () {
     const parent = await fixture<TestDataset>(html`
       <test-dataset>
         <rdf-graph id="test-graph"></rdf-graph>
+      </test-dataset>
+    `)
+
+    const graph = parent.querySelector<RdfGraph>('rdf-graph')!
+    expect(factoryFn).to.have.been.calledOnce
+    expect(graph.value).to.be.ok
+    expect(graph.value?.size).to.equal(1)
+
+    const quad = [...graph.value!][0]
+    expect(quad.subject.value).to.equal('http://example.org/subject')
+    expect(quad.predicate.value).to.equal('http://example.org/predicate')
+    expect(quad.object.value).to.equal('test-value')
+
+    expect(parent.updateGraph).to.have.been.calledWith(graph, graph.value, undefined)
+  })
+
+  it('populates value from window.graphs matching element data-graph atribute on connectedCallback', async function () {
+    const factoryFn = sinon.spy(({ factory }: { factory: DataFactory }) => [
+      factory.quad(
+        factory.namedNode('http://example.org/subject'),
+        factory.namedNode('http://example.org/predicate'),
+        factory.literal('test-value'),
+      ),
+    ])
+
+    window.graphs = {
+      'test-graph': factoryFn,
+    }
+
+    const parent = await fixture<TestDataset>(html`
+      <test-dataset>
+        <rdf-graph data-graph="test-graph"></rdf-graph>
       </test-dataset>
     `)
 
@@ -204,32 +233,5 @@ describe('rdf-graph', function () {
     expect(dynamicGraph.value).to.be.ok
     expect(dynamicGraph.value?.size).to.equal(1)
     expect(parent.updateGraph).to.have.been.calledWith(dynamicGraph, dynamicGraph.value, undefined)
-  })
-
-  it('uses custom environment provided by parent context', async function () {
-    const origDataset = $rdf.dataset.bind($rdf)
-    const customEnv = Object.create($rdf)
-    customEnv.dataset = sinon.spy((...args: any[]) => origDataset(...args))
-
-    window.graphs = {
-      'custom-env-graph': ({ factory }) => [
-        factory.quad(
-          factory.namedNode('http://example.org/c'),
-          factory.namedNode('http://example.org/p'),
-          factory.literal('custom-env-val'),
-        ),
-      ],
-    }
-
-    const parent = await fixture<TestDataset>(html`
-      <test-dataset .rdf=${customEnv}>
-        <rdf-graph id="custom-env-graph"></rdf-graph>
-      </test-dataset>
-    `)
-
-    const graph = parent.querySelector<RdfGraph>('rdf-graph')!
-    expect(customEnv.dataset).to.have.been.called
-    expect(graph.value?.size).to.equal(1)
-    expect(parent.updateGraph).to.have.been.calledWith(graph, graph.value, undefined)
   })
 })
