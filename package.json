@@ -47,7 +47,6 @@
     "clownface-shacl-path": "^2.4.0",
     "is-url": "^1.2.4",
     "lit": "^3",
-    "rdf-canonize": "^3.4.0",
     "rdf-literal": "^2.0.0",
     "sparql-path-parser": "^0.1.1"
   },
