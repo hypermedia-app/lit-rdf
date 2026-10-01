@@ -17,7 +17,7 @@ export default meta
  * This example shows how to use the `<resource-label>` component which displays the value of a given property.
  *
  * 1. `<rdf-environment>` provides the default environment from [@zazuko/env/web.js](https://npm.im/@zazuko/env).
- * 2. The `<data-graph>` holds the RDF/JS dataset which can be requested by child DOM elements.
+ * 2. The `<rdf-graph>` holds the RDF/JS dataset which can be requested by child DOM elements.
  * 3. `<target-node>` element does that and sets the focus node for its children. In this case, the focus node is the node with IRI `http://example.com/node`.
  * 4. Finally, the `<resource-label>` component displays the value of the property specified by the `predicate` attribute (and JS property, if accessed imperatively).
  *
@@ -28,6 +28,19 @@ export const NodeLabel: StoryObj<ResourceLabelProps> = {
   args: {
     targetNode: 'http://example.com/foo',
     labelProp: 'skos:prefLabel',
+    graph: `
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX ex: <http://example.com/>
+
+ex:foo 
+  rdfs:label "Example node" ;
+  skos:prefLabel "The Foo"
+.
+ex:bar 
+  rdfs:label "Example node" ;
+  skos:prefLabel "The Bar"
+.`,
   },
   argTypes: {
     targetNode: {

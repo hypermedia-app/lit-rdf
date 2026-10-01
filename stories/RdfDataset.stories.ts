@@ -3,6 +3,7 @@ import { expect, waitFor } from 'storybook/test'
 import type { DatasetCore } from '@rdfjs/types'
 import * as Examples from './RdfDataset.examples.js'
 import type { PrintDataset } from './RdfDataset.elements.js'
+import type { GraphProps } from './common.js'
 
 const meta = {
   title: 'rdf-dataset',
@@ -11,8 +12,18 @@ const meta = {
 
 export default meta
 
-export const DefaultGraph: StoryObj = {
+export const DefaultGraph: StoryObj<GraphProps<'1' | '2'>> = {
   render: Examples.DatasetFromMultipleDefaultGraphSources,
+  args: {
+    graph1: `
+      prefix ex: <http://example.com/>
+      ex:foo ex:from "graph1" .
+    `,
+    graph2: `
+      prefix ex: <http://example.com/>
+      ex:bar ex:from "graph2" .
+    `,
+  },
   play: async ({ canvasElement: canvas, step }) => {
     const dataset = canvas.querySelector<PrintDataset>('print-dataset')!
 
@@ -39,8 +50,18 @@ export const DefaultGraph: StoryObj = {
   },
 }
 
-export const NamedGraphs: StoryObj = {
+export const NamedGraphs: StoryObj<GraphProps<'1' | '2'>> = {
   render: Examples.DatasetWithNamedGraphs,
+  args: {
+    graph1: `
+      prefix ex: <http://example.com/>
+      ex:foo ex:from "graph1" .
+    `,
+    graph2: `
+      prefix ex: <http://example.com/>
+      ex:bar ex:from "graph2" .
+    `,
+  },
   play: async ({ canvasElement: canvas, step }) => {
     const dataset = canvas.querySelector<PrintDataset>('print-dataset')!
 
@@ -64,7 +85,7 @@ export const NamedGraphs: StoryObj = {
       })
     })
 
-    const graph = canvas.querySelector('rdf-graph#graph2')!
+    const graph = canvas.querySelector('rdf-graph[graph="http://example.com/graph2"]')!
     await step('Remove rdf-graph element from rdf-dataset', async () => {
       graph.remove()
       await waitFor(() => {

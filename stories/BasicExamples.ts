@@ -5,31 +5,19 @@ import '../src/components/target-node.js'
 import '../src/components/resource-label.js'
 import '../src/components/rdf-environment.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
+import type { StoryFn } from '@storybook/web-components-vite'
+import type { GraphProps } from './common.js'
 
-export interface ResourceLabelProps {
+export interface ResourceLabelProps extends GraphProps {
   labelProp?: string
   targetNode?: string
 }
 
-export const ResourceLabel = ({ labelProp, targetNode = 'http://example.com/foo' }: ResourceLabelProps) => {
+export const ResourceLabel: StoryFn<ResourceLabelProps> = ({ labelProp, targetNode = 'http://example.com/foo' }, { loaded }) => {
   return html`
-    <script data-graph="example" type="text/turtle">
-      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-      PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-      PREFIX ex: <http://example.com/>
-      
-      ex:foo 
-        rdfs:label "Example node" ;
-        skos:prefLabel "The Foo"
-      .
-      ex:bar 
-        rdfs:label "Example node" ;
-        skos:prefLabel "The Bar"
-      .
-    </script>
     <rdf-environment>
       <rdf-dataset>
-        <rdf-graph id="example">
+        <rdf-graph .value="${loaded.graph}">
         </rdf-graph>
         <target-node target-node="${targetNode}">
           <resource-label predicate="${ifDefined(labelProp)}"></resource-label>

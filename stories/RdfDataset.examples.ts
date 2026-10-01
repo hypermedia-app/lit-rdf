@@ -4,14 +4,16 @@ import '../src/components/rdf-environment.js'
 import '../src/components/rdf-dataset.js'
 import '../src/components/rdf-graph.js'
 import './RdfDataset.elements.js'
+import type { StoryFn } from '@storybook/web-components-vite'
+import type { GraphProps } from './common.js'
 
-export const DatasetFromMultipleDefaultGraphSources = () => {
+export const DatasetFromMultipleDefaultGraphSources: StoryFn<GraphProps<'1' | '2'>> = (props, { loaded }) => {
   return html`
     <rdf-environment>
       <rdf-dataset>
-        <rdf-graph id="graph1">
+        <rdf-graph .value="${loaded.graph1}">
         </rdf-graph>
-        <rdf-graph id="graph2">
+        <rdf-graph .value="${loaded.graph2}">
         </rdf-graph>
         
         <p>
@@ -21,24 +23,16 @@ export const DatasetFromMultipleDefaultGraphSources = () => {
         <print-dataset></print-dataset>
       </rdf-dataset>
     </rdf-environment>
-    <script data-graph="graph1" type="text/turtle">
-      prefix ex: <http://example.com/>
-      ex:foo ex:from "graph1" .
-    </script>
-    <script data-graph="graph2" type="text/turtle">
-      prefix ex: <http://example.com/>
-      ex:bar ex:from "graph2" .
-    </script>
   `
 }
 
-export const DatasetWithNamedGraphs = () => {
+export const DatasetWithNamedGraphs: StoryFn<GraphProps<'1' | '2'>> = (props, { loaded }) => {
   return html`
     <rdf-environment>
       <rdf-dataset>
-        <rdf-graph id="graph1" graph="http://example.com/graph1">
+        <rdf-graph graph="http://example.com/graph1" .value="${loaded.graph1}">
         </rdf-graph>
-        <rdf-graph id="graph2" graph="http://example.com/graph2">
+        <rdf-graph graph="http://example.com/graph2" .value="${loaded.graph2}">
         </rdf-graph>
         
         <p>
@@ -48,13 +42,5 @@ export const DatasetWithNamedGraphs = () => {
         <print-dataset></print-dataset>
       </rdf-dataset>
     </rdf-environment>
-    <script data-graph="graph1" type="text/turtle">
-      prefix ex: <http://example.com/>
-      ex:foo ex:from "graph1" .
-    </script>
-    <script data-graph="graph2" type="text/turtle">
-      prefix ex: <http://example.com/>
-      ex:bar ex:from "graph2" .
-    </script>
   `
 }

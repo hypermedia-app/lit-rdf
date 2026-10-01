@@ -33,7 +33,6 @@
     "./constructor.js": "./src/constructor.js",
     "./mixins.js": "./src/mixins.js",
     "./controllers.js": "./src/controllers.js",
-    "./runtime/*.js": "./src/runtime/*.js",
     "./sort.js": "./src/sort.js"
   },
   "dependencies": {
