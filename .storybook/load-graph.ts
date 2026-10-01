@@ -1,50 +1,47 @@
-import $rdf from '@zazuko/env/web.js'
+import $rdf from '@zazuko/env/web'
+import isUrl from 'is-url'
 import formats from '@rdfjs/formats'
 import { Readable } from 'readable-stream'
-import type { DatasetCore, Quad } from '@rdfjs/types'
-import '../src/custom-elements.d.ts'
+import type { DatasetCore } from '@rdfjs/types'
 
 $rdf.formats.import(formats)
 
-declare module '@rdfjs/types' {
-  interface Stream extends AsyncGenerator<Quad> {}
-}
+const graphCache = new Map<string, DatasetCore>()
 
-const scriptGraphs = new WeakMap<HTMLScriptElement, DatasetCore>()
-
-async function parseGraphs() {
-  const graphs: Record<string, DatasetCore> = {}
-
-  for (const script of document.querySelectorAll<HTMLScriptElement>('script[data-graph]')) {
-    const graphName = script.getAttribute('data-graph')
-    const mediaType = script.getAttribute('type')
-
-    if (mediaType && graphName) {
-      let graph = scriptGraphs.get(script)
-      if (!graph) {
-        graph = await parseOrFetch(script, mediaType)
-        scriptGraphs.set(script, graph)
-      }
-
-      if (graph) {
-        graphs[graphName] = graph
-      }
-    }
+export async function loadGraphData(contentOrUrl: string | URL): Promise<DatasetCore> {
+  const key = typeof contentOrUrl === 'string' ? contentOrUrl : contentOrUrl.toString()
+  const cached = graphCache.get(key)
+  if (cached) {
+    return cached
   }
 
-  return graphs
-}
-
-async function parseOrFetch(script: HTMLScriptElement, mediaType: string) {
   const dataset = $rdf.dataset()
-  let content: string | null | undefined
+  let content = key
+  let mediaType = 'text/turtle'
 
-  if (script.src) {
-    const response = await fetch(script.src)
+  if (isUrl(content) || content.startsWith('http://') || content.startsWith('https://')) {
+    const url = content
+    const response = await fetch(url)
+    const contentType = response.headers.get('content-type')
+    if (contentType) {
+      mediaType = contentType.split(';')[0]
+    }
+    if (url.endsWith('.nq') || url.endsWith('.nquads')) {
+      mediaType = 'application/n-quads'
+    }
+    else if (url.endsWith('.nt')) {
+      mediaType = 'application/n-triples'
+    }
+    else if (url.endsWith('.json') || url.endsWith('.jsonld')) {
+      mediaType = 'application/ld+json'
+    }
+    else if (url.endsWith('.trig')) {
+      mediaType = 'application/trig'
+    }
+    else if (url.endsWith('.ttl')) {
+      mediaType = 'text/turtle'
+    }
     content = await response.text()
-  }
-  else {
-    content = script.textContent
   }
 
   const stream = $rdf.formats.parsers.import(mediaType, Readable.from(content))
@@ -53,23 +50,7 @@ async function parseOrFetch(script: HTMLScriptElement, mediaType: string) {
       dataset.add(quad)
     }
   }
+
+  graphCache.set(key, dataset)
   return dataset
 }
-
-const mutationObserver = new MutationObserver(async () => {
-  const graphs = await parseGraphs()
-
-  const targets = document.querySelectorAll('rdf-graph')
-
-  for (const target of targets) {
-    const graphName = target.id
-    if (!graphName) {
-      continue
-    }
-    if (graphs[graphName]) {
-      target.value = graphs[graphName]
-    }
-  }
-})
-
-mutationObserver.observe(document.body, { childList: true, subtree: true })

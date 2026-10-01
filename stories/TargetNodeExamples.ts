@@ -6,17 +6,19 @@ import '../src/components/rdf-graph.js'
 import '../src/components/target-node.js'
 import { shrink } from '@zazuko/prefixes'
 import type { GraphPointer } from 'clownface'
+import type { StoryFn } from '@storybook/web-components-vite'
+import type { GraphProps } from './common.js'
 
-export interface SortingTargetNodesProps {
+export interface SortingTargetNodesProps extends GraphProps {
   targetClass: string
   orderBy: string
 }
 
-export const SortingTargetNodes = (props: SortingTargetNodesProps) => {
+export const SortingTargetNodes: StoryFn<SortingTargetNodesProps> = (props, { loaded }) => {
   return html`
     <rdf-environment>
       <rdf-dataset>
-        <rdf-graph id="SortingTargetNodes"></rdf-graph>
+        <rdf-graph .value="${loaded.graph}"></rdf-graph>
         <p>
           Instances of <b><code>${props.targetClass}</code></b> sorted by <b><code>${props.orderBy}</code></b>
         </p>
@@ -26,16 +28,14 @@ export const SortingTargetNodes = (props: SortingTargetNodesProps) => {
         </target-node>
       </rdf-dataset>
     </rdf-environment>
-    <script data-graph="SortingTargetNodes" type="text/turtle" src="https://raw.githubusercontent.com/zazuko/rdf-vocabularies/refs/heads/master/ontologies/rdfs/rdfs.nq">
-    </script>
   `
 }
 
-export const CustomSortingTargetNodes = (props: Pick<SortingTargetNodesProps, 'targetClass'>) => {
+export const CustomSortingTargetNodes: StoryFn<SortingTargetNodesProps> = (props, { loaded }) => {
   return html`
     <rdf-environment>
       <rdf-dataset>
-        <rdf-graph id="CustomSortingTargetNodes"></rdf-graph>
+        <rdf-graph .value="${loaded.graph}"></rdf-graph>
         <p>
           Instances of <b><code>${props.targetClass}</code></b> sorted with <b><code>shrink</code></b> function
         </p>
@@ -45,20 +45,18 @@ export const CustomSortingTargetNodes = (props: Pick<SortingTargetNodesProps, 't
         </target-node>
       </rdf-dataset>
     </rdf-environment>
-    <script data-graph="CustomSortingTargetNodes" type="text/turtle" src="https://raw.githubusercontent.com/zazuko/rdf-vocabularies/refs/heads/master/ontologies/rdfs/rdfs.nq">
-    </script>
   `
 }
 
-export interface SortOrderProps {
+export interface SortOrderProps extends GraphProps {
   direction: 'asc' | 'desc'
 }
 
-export const SortOrderOfTargetNodes = (props: SortOrderProps) => {
+export const SortOrderOfTargetNodes: StoryFn<SortOrderProps> = (props, { loaded }) => {
   return html`
     <rdf-environment>
       <rdf-dataset>
-        <rdf-graph id="SortOrderOfTargetNodes"></rdf-graph>
+        <rdf-graph .value="${loaded.graph}"></rdf-graph>
         <p>
           Direction: <b><code>${props.direction}</code></b>
         </p>
@@ -68,21 +66,19 @@ export const SortOrderOfTargetNodes = (props: SortOrderProps) => {
         </target-node>
       </rdf-dataset>
     </rdf-environment>
-    <script data-graph="SortOrderOfTargetNodes" type="text/turtle" src="https://raw.githubusercontent.com/zazuko/rdf-vocabularies/refs/heads/master/ontologies/rdfs/rdfs.nq">
-    </script>
   `
 }
 
-export interface SortingLiteralsProps {
+export interface SortingLiteralsProps extends GraphProps {
   orderBy: 'schema:age' | 'schema:baseSalary' | 'schema:birthDate'
   direction: 'asc' | 'desc'
 }
 
-export const SortingLiterals = (props: SortingLiteralsProps) => {
+export const SortingLiterals: StoryFn<SortingLiteralsProps> = (props, { loaded }) => {
   return html`
     <rdf-environment>
       <rdf-dataset>
-        <rdf-graph id="SortingLiterals"</rdf-graph>
+        <rdf-graph .value="${loaded.graph}"></rdf-graph>
         <p>
           Instances of <b><code>schema:Person</code></b> sorted by <b><code>${props.orderBy} ${props.direction}ending</code></b>
         </p>
@@ -96,41 +92,5 @@ export const SortingLiterals = (props: SortingLiteralsProps) => {
         </target-node>
       </rdf-dataset>
     </rdf-environment> 
-    <script data-graph="SortingLiterals" type="text/turtle">
-      @prefix ex: <http://example.org/> .
-      @prefix schema: <http://schema.org/> .
-      @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-      @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-      
-      ex:alice a schema:Person ;
-        rdfs:label "Alice" ;
-        schema:age 28 ;
-        schema:baseSalary 55000.50 .
-      
-      ex:bob a schema:Person ;
-        rdfs:label "Bob" ;
-        schema:baseSalary 72000.00 ;
-        schema:birthDate "1985-03-15T10:30:00Z"^^xsd:dateTime .
-      
-      ex:charlie a schema:Person ;
-        rdfs:label "Charlie" ;
-        schema:age 42 ;
-        schema:birthDate "1981-08-22T14:00:00Z"^^xsd:dateTime .
-      
-      ex:diana a schema:Person ;
-        rdfs:label "Diana" ;
-        schema:age 35 ;
-        schema:baseSalary 63000.75 .
-      
-      ex:edward a schema:Person ;
-        rdfs:label "Edward" ;
-        schema:baseSalary 48000.25 ;
-        schema:birthDate "1998-12-05T08:15:00Z"^^xsd:dateTime .
-      
-      ex:fiona a schema:Person ;
-        rdfs:label "Fiona" ;
-        schema:age 23 ;
-        schema:birthDate "2000-07-19T18:45:00Z"^^xsd:dateTime .
-    </script>
   `
 }

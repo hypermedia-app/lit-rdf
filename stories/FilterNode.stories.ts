@@ -25,6 +25,33 @@ export default meta
 export const FilteringByAge: StoryObj<FilteringByAgeProps> = {
   args: {
     minAge: 30,
+    graph: `
+@prefix ex: <http://example.org/> .
+@prefix schema: <http://schema.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+ex:alice a schema:Person ;
+  rdfs:label "Alice" ;
+  foaf:age 28 .
+
+ex:charlie a schema:Person ;
+  rdfs:label "Charlie" ;
+  foaf:age 42 .
+
+ex:diana a schema:Person ;
+  rdfs:label "Diana" ;
+  foaf:age 35 .
+
+ex:edward a schema:Person ;
+  rdfs:label "Edward" ;
+  foaf:age 19 .
+
+ex:fiona a schema:Person ;
+  rdfs:label "Fiona" ;
+  foaf:age 23 .
+      `,
   },
   argTypes: {
     minAge: {
@@ -70,6 +97,43 @@ export const FilteringByAge: StoryObj<FilteringByAgeProps> = {
 export const CustomFilter: StoryObj<CustomFilterProps> = {
   args: {
     filterType: 'hasBirthDate',
+    graph: `
+@prefix ex: <http://example.org/> .
+@prefix schema: <http://schema.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+ex:alice a schema:Person ;
+  rdfs:label "Alice" ;
+  foaf:age 28 ;
+  schema:baseSalary 55000.50 .
+
+ex:bob a schema:Person ;
+  rdfs:label "Bob" ;
+  schema:baseSalary 72000.00 ;
+  schema:birthDate "1985-03-15T10:30:00Z"^^xsd:dateTime .
+
+ex:charlie a schema:Person ;
+  rdfs:label "Charlie" ;
+  foaf:age 42 ;
+  schema:birthDate "1981-08-22T14:00:00Z"^^xsd:dateTime .
+
+ex:diana a schema:Person ;
+  rdfs:label "Diana" ;
+  foaf:age 35 ;
+  schema:baseSalary 63000.75 .
+
+ex:edward a schema:Person ;
+  rdfs:label "Edward" ;
+  foaf:age 19 ;
+  schema:baseSalary 48000.25 ;
+  schema:birthDate "1998-12-05T08:15:00Z"^^xsd:dateTime .
+
+ex:fiona a schema:Person ;
+  rdfs:label "Fiona" ;
+  foaf:age 23 ;
+  schema:birthDate "2000-07-19T18:45:00Z"^^xsd:dateTime .`,
   },
   argTypes: {
     filterType: {

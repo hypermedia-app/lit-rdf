@@ -15,6 +15,8 @@ const meta = {
 
 export default meta
 
+const rdfsOntology = 'https://raw.githubusercontent.com/zazuko/rdf-vocabularies/refs/heads/master/ontologies/rdfs/rdfs.nq'
+
 /**
  * Sorting a list of RDFS resources rendered by `<target-node>`.
  *
@@ -26,6 +28,7 @@ export const SortingTargetNodes: StoryObj<SortingTargetNodesProps> = {
   args: {
     targetClass: 'rdf:Property',
     orderBy: 'rdfs:label',
+    graph: rdfsOntology,
   },
   argTypes: {
     targetClass: {
@@ -70,6 +73,7 @@ export const SortingTargetNodes: StoryObj<SortingTargetNodesProps> = {
 export const CustomSortingTargetNodes: StoryObj<SortingTargetNodesProps> = {
   args: {
     targetClass: 'rdf:Property',
+    graph: rdfsOntology,
   },
   argTypes: {
     targetClass: {
@@ -109,6 +113,7 @@ export const CustomSortingTargetNodes: StoryObj<SortingTargetNodesProps> = {
 export const SortOrder: StoryObj<SortOrderProps> = {
   args: {
     direction: 'asc',
+    graph: rdfsOntology,
   },
   argTypes: {
     direction: {
@@ -144,6 +149,41 @@ export const SortingLiterals: StoryObj<SortingLiteralsProps> = {
   args: {
     direction: 'desc',
     orderBy: 'schema:age',
+    graph: `
+@prefix ex: <http://example.org/> .
+@prefix schema: <http://schema.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:alice a schema:Person ;
+  rdfs:label "Alice" ;
+  schema:age 28 ;
+  schema:baseSalary 55000.50 .
+
+ex:bob a schema:Person ;
+  rdfs:label "Bob" ;
+  schema:baseSalary 72000.00 ;
+  schema:birthDate "1985-03-15T10:30:00Z"^^xsd:dateTime .
+
+ex:charlie a schema:Person ;
+  rdfs:label "Charlie" ;
+  schema:age 42 ;
+  schema:birthDate "1981-08-22T14:00:00Z"^^xsd:dateTime .
+
+ex:diana a schema:Person ;
+  rdfs:label "Diana" ;
+  schema:age 35 ;
+  schema:baseSalary 63000.75 .
+
+ex:edward a schema:Person ;
+  rdfs:label "Edward" ;
+  schema:baseSalary 48000.25 ;
+  schema:birthDate "1998-12-05T08:15:00Z"^^xsd:dateTime .
+
+ex:fiona a schema:Person ;
+  rdfs:label "Fiona" ;
+  schema:age 23 ;
+  schema:birthDate "2000-07-19T18:45:00Z"^^xsd:dateTime .`,
   },
   argTypes: {
     orderBy: {
