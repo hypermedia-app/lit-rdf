@@ -1,5 +1,13 @@
 # lit-rdf
 
+## 0.3.1
+
+### Patch Changes
+
+- 248eebf: No actual `custom-elements.js` module caused issues at runtime
+- 7a53892: `rdf-graph` now initializes itself from 'window.graphs`
+- 7a53892: Removed `data-graph.js` (technically breaking change but the script does not work in 4.0 anyway)
+
 ## 0.3.0
 
 ### Minor Changes
