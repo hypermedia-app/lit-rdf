@@ -1,5 +1,12 @@
 # lit-rdf
 
+## 0.3.2
+
+### Patch Changes
+
+- ee852da: Allow both `[id]` and `[data-attribute]` to select the graph from `window.graphs`
+- ee852da: `rdf-graph` should not rely on RDF environment so that populating data from `window.graphs` is as fast as possible
+
 ## 0.3.1
 
 ### Patch Changes
