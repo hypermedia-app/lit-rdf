@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "skills": {
+    "zazuko-env": {
+      "source": "@zazuko/env",
+      "sourceType": "node_modules",
+      "skillPath": "SKILL.md",
+      "version": "3.0.4",
+      "computedHash": "ed12e8bdf2df5f2e35e5f051d6a996fc03c5731b84fe5d0d2f4a5e152947f287"
+    }
+  }
+}

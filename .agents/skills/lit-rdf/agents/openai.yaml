@@ -1,0 +1,4 @@
+interface:
+  display_name: "lit-rdf"
+  short_description: "Build RDF views with Lit context and data binding"
+  default_prompt: "Use $lit-rdf to build a data-bound RDF view with filtering and sorting."

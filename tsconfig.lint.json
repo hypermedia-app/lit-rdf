@@ -4,6 +4,7 @@
     "src",
     "stories",
     "test",
-    ".storybook/*.ts"
+    ".storybook/*.ts",
+    ".agents/skills/lit-rdf/assets/*.ts"
   ]
 }
