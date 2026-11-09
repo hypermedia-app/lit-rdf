@@ -1,5 +1,14 @@
 # lit-rdf
 
+## 0.3.3
+
+### Patch Changes
+
+- 3b452a8: Remove unused direct dependency `rdf-canonize`
+- 3b452a8: Update `@zazuko/env` to `^3.0.4`.
+- 5a504bc: Made `@zazuko/prefixes` a peer dependency
+- 3b452a8: Add a repository AI skill demonstrating lit-rdf data binding, filtering, sorting, and custom component patterns, with an interactive example and contributor guidance.
+
 ## 0.3.2
 
 ### Patch Changes
