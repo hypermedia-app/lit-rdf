@@ -42,13 +42,15 @@
     "@rdfjs/dataset": "^2.0.3",
     "@rdfjs/types": "^2",
     "@zazuko/env": "^3.0.4",
-    "@zazuko/prefixes": "^2.6.1",
     "clownface": "^2.0.3",
     "clownface-shacl-path": "^2.4.0",
     "is-url": "^1.2.4",
     "lit": "^3",
     "rdf-literal": "^2.0.0",
     "sparql-path-parser": "^0.1.1"
+  },
+  "peerDependencies": {
+    "@zazuko/prefixes": ">=2.6.1"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",
