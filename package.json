@@ -61,7 +61,7 @@
     "@rollup/plugin-commonjs": "^26",
     "@rolldown/plugin-node-polyfills": "^1.0.3",
     "@storybook/addon-docs": "^10.6.0",
-    "@storybook/addon-vitest": "^10.6.0",
+    "@storybook/addon-vitest": "^10.6.6",
     "@storybook/web-components-vite": "^10.6.0",
     "@tpluscode/eslint-config": "^4.0.2",
     "@types/clownface": "^2.0.10",
