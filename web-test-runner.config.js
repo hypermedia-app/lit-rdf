@@ -9,6 +9,8 @@ export default {
     fromRollup(commonjs)(),
   ],
   nodeResolve: true,
+  // Allow more time for Chrome to start on shared CI runners.
+  browserStartTimeout: 60000,
   concurrency: 1,
   coverage: true,
 }
