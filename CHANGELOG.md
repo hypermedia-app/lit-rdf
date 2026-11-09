@@ -1,5 +1,11 @@
 # lit-rdf
 
+## 0.3.5
+
+### Patch Changes
+
+- c557dd5: Remove superfluous `postinstall` script
+
 ## 0.3.4
 
 ### Patch Changes
