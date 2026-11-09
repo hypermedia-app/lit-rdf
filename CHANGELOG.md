@@ -1,5 +1,11 @@
 # lit-rdf
 
+## 0.3.4
+
+### Patch Changes
+
+- 0bd749b: Include the lit-rdf skill in the published package and clarify when to use it.
+
 ## 0.3.3
 
 ### Patch Changes
