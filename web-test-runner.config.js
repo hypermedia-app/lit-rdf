@@ -6,7 +6,8 @@ export default {
   files: 'test/components/**/*.test.ts',
   plugins: [
     esbuildPlugin({ ts: true, tsconfig: 'tsconfig.json', target: 'auto' }),
-    fromRollup(commonjs)(),
+    // WTR serves individual modules, so CommonJS imports must be hoisted instead of wrapped.
+    fromRollup(commonjs)({ strictRequires: false }),
   ],
   nodeResolve: true,
   // Allow more time for Chrome to start on shared CI runners.

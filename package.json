@@ -60,7 +60,7 @@
     "@eslint/js": "^10",
     "@lit-labs/ssr": "^4.1.0",
     "@open-wc/testing": "^5.0.0",
-    "@rollup/plugin-commonjs": "^26",
+    "@rollup/plugin-commonjs": "^29.0.3",
     "@rolldown/plugin-node-polyfills": "^1.0.3",
     "@storybook/addon-docs": "^10.6.6",
     "@storybook/addon-vitest": "^10.6.6",
