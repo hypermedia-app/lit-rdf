@@ -1,6 +1,6 @@
 ---
 name: lit-rdf
-description: Build and explain RDF-driven Lit interfaces using lit-rdf, including dataset binding, focus-node context, graph traversal, filtering, sorting, and custom reactive components. Use for lit-rdf examples and integrations, rather than generic RDF processing or unrelated Lit components.
+description: Use when building or explaining RDF-driven Lit interfaces with lit-rdf, including dataset binding, focus-node context, graph traversal, filtering, sorting, and custom reactive components. Covers lit-rdf examples and integrations; excludes generic RDF processing and unrelated Lit components.
 ---
 
 # Build with lit-rdf
