@@ -5,6 +5,6 @@
     "stories",
     "test",
     ".storybook/*.ts",
-    ".agents/skills/lit-rdf/assets/*.ts"
+    "skills/lit-rdf/assets/*.ts"
   ]
 }

@@ -2,4 +2,4 @@
 "lit-rdf": patch
 ---
 
-Clarify when to use the lit-rdf skill
+Include the lit-rdf skill in the published package and clarify when to use it.

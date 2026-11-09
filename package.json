@@ -3,9 +3,10 @@
   "version": "0.3.3",
   "type": "module",
   "scripts": {
-    "prepare": "husky && patch-package && skills experimental_sync -y",
+    "postinstall": "skills experimental_sync -y",
+    "prepare": "husky && patch-package",
     "lint": "eslint . --quiet",
-    "lint:skills": "skill-check check .agents/skills/lit-rdf --no-security-scan --fail-on-warning",
+    "lint:skills": "skill-check check skills --no-security-scan --fail-on-warning",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test:storybook": "vitest --project=storybook",
@@ -18,6 +19,7 @@
     "release": "changeset publish"
   },
   "files": [
+    "skills/lit-rdf/",
     "CHANGELOG.md",
     "custom-elements.json",
     "src/**/*.js",
@@ -42,7 +44,7 @@
     "@rdfjs/data-model": "^2.1.1",
     "@rdfjs/dataset": "^2.0.3",
     "@rdfjs/types": "^2",
-    "@zazuko/env": "^3.0.4",
+    "@zazuko/env": "^3.0.6",
     "clownface": "^2.0.3",
     "clownface-shacl-path": "^2.4.0",
     "is-url": "^1.2.4",

@@ -1,19 +1,19 @@
 {
   "version": 1,
   "skills": {
+    "env": {
+      "source": "@zazuko/env",
+      "sourceType": "node_modules",
+      "skillPath": "skills/env/SKILL.md",
+      "version": "3.0.6",
+      "computedHash": "c203b696dfce7d28078d70f9540d9ed46f56066bb8c94bfef9d0e74b119d46d1"
+    },
     "skill-check": {
       "source": "skill-check",
       "sourceType": "node_modules",
       "skillPath": "skills/skill-check/SKILL.md",
       "version": "1.2.0",
       "computedHash": "b24a4253a6066d6672b94ece2e77e39a797430a810e0afc75121fd2544e153a5"
-    },
-    "zazuko-env": {
-      "source": "@zazuko/env",
-      "sourceType": "node_modules",
-      "skillPath": "SKILL.md",
-      "version": "3.0.4",
-      "computedHash": "ed12e8bdf2df5f2e35e5f051d6a996fc03c5731b84fe5d0d2f4a5e152947f287"
     }
   }
 }

@@ -8,5 +8,4 @@ coverage/
 custom-elements.json
 
 .agents/skills/*
-!.agents/skills/lit-rdf
 .claude/
