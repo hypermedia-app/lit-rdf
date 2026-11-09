@@ -86,7 +86,7 @@
     "lint-staged": "^17.3.0",
     "skills": "^1.7.6",
     "patch-package": "^8.0.1",
-    "playwright": "^1.58.2",
+    "playwright": "^1.65.0",
     "sinon": "^22.1.0",
     "storybook": "^10.6.0",
     "string-to-stream": "^3.0.1",
