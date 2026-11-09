@@ -3,8 +3,7 @@
   "version": "0.3.4",
   "type": "module",
   "scripts": {
-    "postinstall": "skills experimental_sync -y",
-    "prepare": "husky && patch-package",
+    "prepare": "husky && patch-package && skills experimental_sync -y",
     "lint": "eslint . --quiet",
     "lint:skills": "skill-check check skills --no-security-scan --fail-on-warning",
     "storybook": "storybook dev -p 6006",
@@ -19,7 +18,7 @@
     "release": "changeset publish"
   },
   "files": [
-    "skills/lit-rdf/",
+    "skills/",
     "CHANGELOG.md",
     "custom-elements.json",
     "src/**/*.js",
