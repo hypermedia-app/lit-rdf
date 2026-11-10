@@ -98,21 +98,21 @@ interface HTMLTargetNodeElement extends HTMLElement {
      */
     orderDir: 'asc' | 'desc';
     /**
-     * Target nodes that are objects of the specified predicate URI.
+     * Target nodes that are objects of the specified predicate URI or graph pointer.
      */
-    targetObjectsOf: NamedNode | undefined;
+    targetObjectsOf: NamedNode | GraphPointer | undefined;
     /**
-     * Target nodes that are subjects of the specified predicate URI.
+     * Target nodes that are subjects of the specified predicate URI or graph pointer.
      */
-    targetSubjectsOf: NamedNode | undefined;
+    targetSubjectsOf: NamedNode | GraphPointer | undefined;
     /**
-     * Target nodes that are instances of the specified class URI (via `rdf:type`).
+     * Target nodes that are instances of the specified class URI or graph pointer (via `rdf:type`).
      */
-    targetClass: NamedNode | undefined;
+    targetClass: NamedNode | GraphPointer | undefined;
     /**
-     * Target node URI to select directly.
+     * Target node URI or graph pointer to select directly. Selection uses the surrounding dataset, not the pointer's dataset.
      */
-    targetNode: NamedNode | undefined;
+    targetNode: NamedNode | GraphPointer | undefined;
     /**
      * The resolved clownface focus node(s) provided in context.
      */
