@@ -1,5 +1,11 @@
 # lit-rdf
 
+## 0.3.6
+
+### Patch Changes
+
+- 3ec5f7f: Allow GraphPointer property bindings for all four target-node selectors, matching the existing Clownface runtime support.
+
 ## 0.3.5
 
 ### Patch Changes
