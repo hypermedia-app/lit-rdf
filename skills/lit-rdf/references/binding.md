@@ -57,10 +57,12 @@ Here `peopleDataset` and `labelsDataset` are RDF/JS DatasetCore objects, not str
 
 | Attribute            | Property binding type           | Meaning                           |
 |----------------------|---------------------------------|-----------------------------------|
-| `target-node`        | `.targetNode` = NamedNode       | Explicit resource                 |
-| `target-class`       | `.targetClass` = NamedNode      | Subjects with matching `rdf:type` |
-| `target-subjects-of` | `.targetSubjectsOf` = NamedNode | Subjects of a predicate           |
-| `target-objects-of`  | `.targetObjectsOf` = NamedNode  | Objects of a predicate            |
+| `target-node`        | `.targetNode` = NamedNode or GraphPointer       | Explicit resource                 |
+| `target-class`       | `.targetClass` = NamedNode or GraphPointer      | Subjects with matching `rdf:type` |
+| `target-subjects-of` | `.targetSubjectsOf` = NamedNode or GraphPointer | Subjects of a predicate           |
+| `target-objects-of`  | `.targetObjectsOf` = NamedNode or GraphPointer  | Objects of a predicate            |
+
+All four target properties accept a Clownface `GraphPointer` as well as a `NamedNode`; for example, `.targetClass=${typePointer}`. A pointer supplies its RDF term to the selector, while selection still reads the surrounding `rdf-dataset`; it does not replace that dataset with the pointer's dataset. Attribute bindings remain serialized IRIs or CURIEs.
 
 Use one selector per element. If several are set, the implementation chooses in the table's order; it does not combine them. Prefixed attributes use the library's known prefixes. Use a full IRI or a NamedNode property binding for application vocabularies; declaring a prefix in Turtle does not register it with attribute converters.
 

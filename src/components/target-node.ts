@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { provide } from '@lit/context'
-import type { MultiPointer } from 'clownface'
+import type { GraphPointer, MultiPointer } from 'clownface'
 import type { NamedNode } from '@rdfjs/types'
 import { toNamedNode, toSortPredicate } from '../converter.js'
 import type { SortPredicate } from '../context.js'
@@ -44,28 +44,28 @@ export default class TargetNode extends LitElement {
   public orderDir: 'asc' | 'desc' = 'asc'
 
   /**
-   * Target nodes that are objects of the specified predicate URI.
+   * Target nodes that are objects of the specified predicate URI or graph pointer.
    */
   @property({ type: Object, converter: toNamedNode, attribute: 'target-objects-of' })
-  public targetObjectsOf: NamedNode | undefined
+  public targetObjectsOf: NamedNode | GraphPointer | undefined
 
   /**
-   * Target nodes that are subjects of the specified predicate URI.
+   * Target nodes that are subjects of the specified predicate URI or graph pointer.
    */
   @property({ type: Object, converter: toNamedNode, attribute: 'target-subjects-of' })
-  public targetSubjectsOf: NamedNode | undefined
+  public targetSubjectsOf: NamedNode | GraphPointer | undefined
 
   /**
-   * Target nodes that are instances of the specified class URI (via `rdf:type`).
+   * Target nodes that are instances of the specified class URI or graph pointer (via `rdf:type`).
    */
   @property({ type: Object, converter: toNamedNode, attribute: 'target-class' })
-  public targetClass: NamedNode | undefined
+  public targetClass: NamedNode | GraphPointer | undefined
 
   /**
-   * Target node URI to select directly.
+   * Target node URI or graph pointer to select directly. Selection uses the surrounding dataset, not the pointer's dataset.
    */
   @property({ type: Object, converter: toNamedNode, attribute: 'target-node' })
-  public targetNode: NamedNode | undefined
+  public targetNode: NamedNode | GraphPointer | undefined
 
   /**
    * The resolved clownface focus node(s) provided in context.
