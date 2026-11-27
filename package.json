@@ -33,6 +33,7 @@
     "./components/*.js": "./src/components/*.js",
     "./converter.js": "./src/converter.js",
     "./constructor.js": "./src/constructor.js",
+    "./environment.js": "./src/environment.js",
     "./mixins.js": "./src/mixins.js",
     "./controllers.js": "./src/controllers.js",
     "./sort.js": "./src/sort.js"
@@ -52,6 +53,9 @@
     "sparql-path-parser": "^0.1.1"
   },
   "peerDependencies": {
+    "@tpluscode/rdf-ns-builders": ">=5",
+    "@types/clownface": "^2.0.10",
+    "@types/rdfjs__environment": "^1.0.0",
     "@zazuko/prefixes": ">=2.6.1"
   },
   "devDependencies": {
@@ -68,8 +72,8 @@
     "@storybook/addon-vitest": "^10.6.6",
     "@storybook/web-components-vite": "^10.6.6",
     "@tpluscode/eslint-config": "^4.0.2",
-    "@types/clownface": "^2.0.10",
     "@types/is-url": "^1.2.32",
+    "@types/mocha": "^10.0.10",
     "@types/rdfjs__data-model": "^2.0.9",
     "@types/rdfjs__dataset": "^2.0.7",
     "@types/readable-stream": "^4.0.24",

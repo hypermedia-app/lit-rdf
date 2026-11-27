@@ -1,5 +1,5 @@
 import type { LitElement } from 'lit'
-import type { Environment } from './context.js'
+import type { Environment } from './environment.js'
 
 /**
  * Constructor type for LitElement classes and mixins.

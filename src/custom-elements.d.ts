@@ -42,10 +42,6 @@ interface HTMLRdfDatasetElement extends HTMLElement {
 
 
 interface HTMLRdfEnvironmentElement extends HTMLElement {
-    /**
-     * The RDF/JS environment instance provided in context to descendant elements.
-     */
-    rdf: Environment;
 }
 
 

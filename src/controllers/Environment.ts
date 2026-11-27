@@ -1,12 +1,17 @@
 import type { ReactiveControllerHost } from 'lit'
 import { type Context, ContextConsumer } from '@lit/context'
-import * as context from '../context.js'
+import { environment } from '../context.js'
+import type { Environment as AppEnvironment } from '../environment.js'
+
+function missingEnvironmentError() {
+  return new Error('Environment not available. Make sure a parent <rdf-environment> element or provideEnvironment() mixin provides a defined rdf environment.')
+}
 
 /**
  * Reactive controller for consuming the ambient RDF/JS environment from context.
  */
-export class Environment<E extends context.Environment = context.Environment> {
-  private consumer: ContextConsumer<Context<unknown, E | undefined>, ReactiveControllerHost & HTMLElement>
+export class Environment<E extends AppEnvironment = AppEnvironment> {
+  private consumer: ContextConsumer<Context<unknown, E>, ReactiveControllerHost & HTMLElement>
 
   /**
    * Initializes the environment controller for the host element.
@@ -15,11 +20,24 @@ export class Environment<E extends context.Environment = context.Environment> {
    * @param callback Optional callback invoked whenever the environment becomes available or changes
    */
   constructor(host: ReactiveControllerHost & HTMLElement, callback?: (value: E) => void) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     this.consumer = new ContextConsumer(host, {
-      context: context.environment,
-      callback,
+      context: environment as Context<unknown, E>,
+      callback: (value) => {
+        if (value) {
+          callback?.(value)
+        }
+      },
+    })
+
+    host.addController({
+      hostConnected: () => {
+        if (!this.consumer.value) {
+          throw missingEnvironmentError()
+        }
+      },
+      hostDisconnected: () => {
+        this.consumer.value = undefined
+      },
     })
   }
 
@@ -29,7 +47,7 @@ export class Environment<E extends context.Environment = context.Environment> {
    */
   get value() {
     if (!this.consumer.value) {
-      throw new Error('Environment not available. Make sure that a parent element is providing the environment.')
+      throw missingEnvironmentError()
     }
 
     return this.consumer.value
