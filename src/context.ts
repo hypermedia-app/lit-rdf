@@ -1,13 +1,16 @@
 import { createContext } from '@lit/context'
 import type { GraphPointer, MultiPointer } from 'clownface'
-import type $rdf from '@zazuko/env/web.js'
-import type { DatasetCore, NamedNode, Term } from '@rdfjs/types'
+import type { Environment as RdfEnv } from '@rdfjs/environment/Environment.js'
+import type { DatasetFactory } from '@zazuko/env/lib/DatasetFactory.js'
+import type { DataFactory, DatasetCore, NamedNode, Term } from '@rdfjs/types'
+import type ClownfaceFactory from 'clownface/Factory.js'
+import type NsBuildersFactory from '@tpluscode/rdf-ns-builders'
 
 /**
- * RDF/JS environment capabilities required by lit-rdf.
- * Custom environments can be provided if they implement these capabilities.
+ * RDF/JS environment with the Clownface, dataset, data model, and namespace builder factories.
+ * Compatible custom environments can be provided in place of the default environment.
  */
-export type Environment = Pick<typeof $rdf, 'clownface' | 'dataset' | 'fromQuad' | 'ns'>
+export type Environment = RdfEnv<ClownfaceFactory | DatasetFactory | DataFactory | NsBuildersFactory>
 
 /**
  * Function type that extracts a sort key (RDF Term, string, number, or boolean) from a clownface GraphPointer.

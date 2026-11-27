@@ -52,6 +52,10 @@
     "sparql-path-parser": "^0.1.1"
   },
   "peerDependencies": {
+    "@rdfjs/environment": "^1.0.0",
+    "@tpluscode/rdf-ns-builders": "^5.0.0",
+    "@types/clownface": "^2.0.10",
+    "@types/rdfjs__environment": "^1.0.0",
     "@zazuko/prefixes": ">=2.6.1"
   },
   "devDependencies": {
@@ -68,7 +72,6 @@
     "@storybook/addon-vitest": "^10.6.6",
     "@storybook/web-components-vite": "^10.6.6",
     "@tpluscode/eslint-config": "^4.0.2",
-    "@types/clownface": "^2.0.10",
     "@types/is-url": "^1.2.32",
     "@types/rdfjs__data-model": "^2.0.9",
     "@types/rdfjs__dataset": "^2.0.7",
