@@ -1,12 +1,15 @@
 import { createContext } from '@lit/context'
 import type { GraphPointer, MultiPointer } from 'clownface'
-import type env from '@zazuko/env/web.js'
-import type { DatasetCore, NamedNode, Term } from '@rdfjs/types'
+import type { Environment as RdfEnv } from '@rdfjs/environment/Environment'
+import type { DatasetFactory } from '@zazuko/env/lib/DatasetFactory'
+import type { DataFactory, DatasetCore, NamedNode, Term } from '@rdfjs/types'
+import type ClownfaceFactory from 'clownface/Factory'
+import type NsBuildersFactory from '@tpluscode/rdf-ns-builders'
 
 /**
  * Type representing the RDF/JS environment instance from `@zazuko/env`.
  */
-export type Environment = typeof env
+export type Environment = RdfEnv<ClownfaceFactory | DatasetFactory | DataFactory | NsBuildersFactory>
 
 /**
  * Function type that extracts a sort key (RDF Term, string, number, or boolean) from a clownface GraphPointer.
