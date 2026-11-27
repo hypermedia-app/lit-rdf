@@ -1,7 +1,7 @@
 import { provide } from '@lit/context'
 import { state } from 'lit/decorators.js'
 import type { LitElementConstructor, WithEnvironment } from '../constructor.js'
-import type { Environment } from '../context.js'
+import type { Environment } from '../environment.js'
 import { environment as context } from '../context.js'
 
 /**

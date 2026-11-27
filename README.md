@@ -64,3 +64,29 @@ Compose them declaratively in your HTML or Lit templates:
 ```
 
 For more detailed guides and interactive demonstrations, visit the [Storybook documentation](https://hypermedia-app.github.io/lit-rdf/).
+
+## Custom RDF environments
+
+`<rdf-environment>` provides the stock `@zazuko/env/web.js` environment by default.
+To use an app environment throughout your project, configure it before creating any
+`<rdf-environment>` elements. In TypeScript, register its type in the same startup module.
+If the page already contains the tag, configure the environment before importing
+`lit-rdf` or the module that registers the element.
+
+```ts
+import { configureEnvironment } from 'lit-rdf/environment.js'
+import { appEnv } from './app-env.js'
+
+declare module 'lit-rdf/environment.js' {
+  interface EnvironmentConfig {
+    rdf: typeof appEnv
+  }
+}
+
+configureEnvironment(appEnv)
+```
+
+In descendant Lit elements, `new Environment(this)` from `lit-rdf/controllers.js`
+uses the registered type for its `.value` and its callback. The registration applies
+throughout the TypeScript project, so any providers that set `rdf` directly should
+supply a compatible environment as well.
